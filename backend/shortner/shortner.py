@@ -4,12 +4,12 @@ import secrets
 from backend.extensions import url_col
 
 shortner = Blueprint('shortner',__name__, url_prefix='/shortner')
-@shortner.route('',methods=['POST'])
+@shortner.route('',methods=['POST','GET'])
 def get_urls():
     x = request.get_json()
     long,alias,allowMod = x['url'],x['alias'],x['allowMod']
-    short  = generate_url( long,alias,allowMod)
-    return short
+    response  = generate_url( long,alias,allowMod)
+    return response
 
 def generate_url(long,alias='',allowMod=False):
     if alias == '':
@@ -28,4 +28,4 @@ def generate_url(long,alias='',allowMod=False):
             
             url_col.insert_one({short:long})
     print("inserted" ,long, " as = >",short, " and its _id is",url_col.find_one({short: {'$exists':True}})['_id'])
-    return short
+    return [{'long':long,'short':short}]
