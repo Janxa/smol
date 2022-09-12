@@ -25,6 +25,7 @@ def generate_url(long,alias='',allowMod=False):
             else:
                 return 'error'
         else:
+            
             url_col.insert_one({short:long})
-    print(short)
+    print("inserted" ,long, " as = >",short, " and its _id is",url_col.find_one({short: {'$exists':True}})['_id'])
     return short
