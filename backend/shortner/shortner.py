@@ -1,5 +1,4 @@
-from genericpath import exists
-from flask import Flask, request, Blueprint,make_response
+from flask import Blueprint
 from backend.services import generate_url
 
 shortner = Blueprint('shortner',__name__, url_prefix='/shortner')
