@@ -21,5 +21,10 @@ def generate_url(long,alias,allowMod):
     return {"short":short,"long":long}
         
 def get_long_url(short):
+    print(short)
     url_object = url_col.find_one({"short":domain_name+short})
-    return url_object['long']
+    print(url_object)
+    if url_object != None:
+        return url_object['long']
+    else:
+        return "error"
