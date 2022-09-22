@@ -7,7 +7,10 @@ redirection = Blueprint('redirect',__name__, url_prefix='/redirect')
 def redirection_url(short):
     long = get_long_url(short)
     print(long)
-    response = make_response(long)
-    response.headers.add("Access-Control-Allow-Origin", "*")
+    if long == "Url not found":
+        response = make_response(long,404)
+    else:
+        response = make_response(long)
+        response.headers.add("Access-Control-Allow-Origin", "*")
     print(response)
     return response

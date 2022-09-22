@@ -27,4 +27,4 @@ def get_long_url(short):
     if url_object != None:
         return url_object['long']
     else:
-        return "error"
+        return "Url not found"
