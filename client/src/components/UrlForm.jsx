@@ -10,8 +10,16 @@ class UrlForm extends Component {
     url_list: [],
   };
   schema = Joi.object({
-    url: Joi.string().pattern(url_regex).required(),
-    alias: Joi.string().min(3).allow(""),
+    url: Joi.string().pattern(url_regex).max(1000).required().messages({
+      "string.pattern.base":
+        "This is not a valid url, url should look like 'http://thisIsAnURL.com'",
+      "string.max": "Url too long",
+      "string.empty": "Please insert an url",
+    }),
+    alias: Joi.string().min(3).max(1000).allow("").messages({
+      "string.min": "Alias too short",
+      "string.max": "Alias too long",
+    }),
   });
   handleChange = ({ currentTarget: input }) => {
     const name = input.name;
@@ -31,16 +39,21 @@ class UrlForm extends Component {
     let errors = { ...this.state.errors };
     let url_list = [...this.state.url_list];
     try {
-      await this.schema.validateAsync({
-        url: data["url"],
-        alias: data["alias"],
-      });
+      await this.schema.validateAsync(
+        {
+          url: data["url"],
+          alias: data["alias"],
+        },
+        { abortEarly: false }
+      );
       const res = await axios.post("shortner/generate", data);
       url_list.push(res.data);
       this.setState({ url_list });
       console.log(this.state);
     } catch (err) {
-      errors = err;
+      err.details.forEach(
+        (error) => (errors[error.context.label] = error.message)
+      );
       this.setState({ errors }, () => {
         console.log("error", this.state.errors);
       });
@@ -58,6 +71,7 @@ class UrlForm extends Component {
             name="url"
             type="text"
           />
+          {this.state.errors !== false && <p>{this.state.errors["url"]}</p>}
           <label htmlFor="alias">Customize your url</label>
           <input
             value={data.alias}
@@ -71,6 +85,8 @@ class UrlForm extends Component {
             checked={data.allowMod}
             onChange={this.handleCheck}
           />
+          {this.state.errors !== false && <p>{this.state.errors["alias"]}</p>}
+
           <button type="submit">Make it SMOL !</button>
         </form>
         {this.state.url_list.length !== 0 && (

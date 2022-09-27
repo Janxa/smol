@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 function UrlPairs(props) {
-  console.log("props", props);
   return (
     <div>
       <p>
