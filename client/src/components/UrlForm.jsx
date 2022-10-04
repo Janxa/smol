@@ -4,10 +4,12 @@ import axios from "axios";
 import UrlPairs from "./UrlPairs";
 const Joi = require("joi");
 class UrlForm extends Component {
+  constructor(props) {
+    super(props);
+  }
   state = {
     data: { url: "", alias: "", allowMod: false },
     errors: {},
-    url_list: [],
   };
   schema = Joi.object({
     url: Joi.string().pattern(url_regex).max(1000).required().messages({
@@ -46,7 +48,6 @@ class UrlForm extends Component {
     event.preventDefault();
     const data = { ...this.state.data };
     let errors = { ...this.state.errors };
-    let url_list = [...this.state.url_list];
     try {
       await this.schema.validateAsync(
         {
@@ -56,10 +57,10 @@ class UrlForm extends Component {
         { abortEarly: false }
       );
       const res = await axios.post("shortner/generate", data);
-      url_list.push(res.data);
-      this.setState({ url_list });
+      this.props.add_url_to_list(res.data);
       console.log(this.state);
     } catch (err) {
+      console.log(err);
       err.details.forEach(
         (error) => (errors[error.context.label] = error.message)
       );
@@ -71,7 +72,7 @@ class UrlForm extends Component {
   render() {
     const data = { ...this.state.data };
     return (
-      <>
+      <section>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="url">Enter the url you want to shorten</label>
           <input
@@ -98,10 +99,10 @@ class UrlForm extends Component {
 
           <button type="submit">Make it SMOL !</button>
         </form>
-        {this.state.url_list.length !== 0 && (
-          <UrlPairs data={this.state.url_list.at(-1)} />
+        {this.props.url_list.length !== 0 && (
+          <UrlPairs data={this.props.url_list.at(-1)} />
         )}
-      </>
+      </section>
     );
   }
 }
