@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import url_regex from "../variables";
+import { url_regex, reserved_keywords } from "../variables";
 import axios from "axios";
 import UrlPairs from "./UrlPairs";
 const Joi = require("joi");
@@ -16,10 +16,19 @@ class UrlForm extends Component {
       "string.max": "Url too long",
       "string.empty": "Please insert an url",
     }),
-    alias: Joi.string().min(3).max(1000).allow("").messages({
-      "string.min": "Alias too short",
-      "string.max": "Alias too long",
-    }),
+    alias: Joi.string()
+      .min(3)
+      .trim()
+      .max(1000)
+      .regex(/^\S+$/)
+      .allow("")
+      .invalid(...reserved_keywords)
+      .messages({
+        "string.min": "Alias too short",
+        "string.max": "Alias too long",
+        "string.invalid": "Alias invalid",
+        "string.regex": "Alias can't contain space",
+      }),
   });
   handleChange = ({ currentTarget: input }) => {
     const name = input.name;
