@@ -3,7 +3,7 @@ import UrlPairs from "./UrlPairs";
 function Sidebar(props) {
   return (
     <aside>
-      <h3>Your recent smol urls</h3>;
+      <h3>Your recent smol urls</h3>
       <ul>
         {props.url_list.map((url_pair, id) => (
           <li key={id}>
