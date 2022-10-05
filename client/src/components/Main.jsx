@@ -3,13 +3,11 @@ import UrlForm from "./UrlForm";
 import Sidebar from "./Sidebar";
 import { withCookies, Cookies } from "react-cookie";
 class Main extends Component {
-  // state = { url_list: this.props.cookies.url_list || [] };
-  componentWillMount() {
-    const { cookies } = this.props;
-    this.setState({
-      url_list: cookies.get("url_list") || [],
-    });
-  }
+  state = { url_list: this.props.cookies.get("url_list") || [] };
+  // componentWillMount() {
+  //   const { cookies } = this.props;
+  //   this.setState({ url_list: cookies.get("url_list") || [] });
+  // }
   add_url_to_list = (url) => {
     const url_list = [...this.state.url_list];
     url_list.push(url);
