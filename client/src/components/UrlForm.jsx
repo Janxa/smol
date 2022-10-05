@@ -9,6 +9,7 @@ class UrlForm extends Component {
   }
   state = {
     data: { url: "", alias: "", allowMod: false },
+    last_url: {},
     errors: {},
   };
   schema = Joi.object({
@@ -33,8 +34,8 @@ class UrlForm extends Component {
       }),
   });
   handleChange = ({ currentTarget: input }) => {
-    const name = input.name;
     const data = { ...this.state.data };
+    const name = input.name;
     data[name] = input.value;
     this.setState({ data });
   };
@@ -48,6 +49,7 @@ class UrlForm extends Component {
     event.preventDefault();
     const data = { ...this.state.data };
     let errors = { ...this.state.errors };
+    let last_url = { ...this.state.last_url };
     try {
       await this.schema.validateAsync(
         {
@@ -58,7 +60,8 @@ class UrlForm extends Component {
       );
       const res = await axios.post("shortner/generate", data);
       this.props.add_url_to_list(res.data);
-      console.log(this.state);
+      last_url = res.data;
+      this.setState({ last_url });
     } catch (err) {
       console.log(err);
       err.details.forEach(
@@ -99,8 +102,8 @@ class UrlForm extends Component {
 
           <button type="submit">Make it SMOL !</button>
         </form>
-        {this.props.url_list.length !== 0 && (
-          <UrlPairs data={this.props.url_list.at(-1)} />
+        {Object.keys(this.state.last_url).length !== 0 && (
+          <UrlPairs data={this.state.last_url} />
         )}
       </section>
     );

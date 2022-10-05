@@ -19,9 +19,9 @@ function App() {
       <Header />
       <Main />
       <Footer />
-      {Object.keys(cookies).length === 0 && (
-        <CookiesBanner CreateCookie={CreateCookie} />
-      )}
+      {/* {Object.keys(cookies).length === 0 && ( */}
+      <CookiesBanner CreateCookie={CreateCookie} />
+      {/* )} */}
     </div>
   );
 }
