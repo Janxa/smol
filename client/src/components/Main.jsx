@@ -22,8 +22,12 @@ class Main extends Component {
   delete_url_from_list = (id) => {
     const url_list = [...this.state.url_list];
     let deleted = url_list.splice(id, 1);
-
     this.setState({ url_list });
+    if (Object.keys(this.props.cookies.cookies).length > 0) {
+      this.props.cookies.set("url_list", url_list, {
+        path: "/",
+      });
+    }
     console.log("list", url_list);
   };
   render() {
