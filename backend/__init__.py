@@ -1,5 +1,5 @@
 from flask import Flask, request
-from backend.extensions import url_col
+from backend.extensions import url_collection
 from backend.shortner.shortner import shortner
 from backend.redirect.redirect import redirection
 

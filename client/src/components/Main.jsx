@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import UrlForm from "./UrlForm";
 import Sidebar from "./Sidebar";
-import { withCookies, Cookies } from "react-cookie";
+import { withCookies } from "react-cookie";
 import CookiesBanner from "./Cookies";
+import axios from "axios";
 class Main extends Component {
   state = { url_list: this.props.cookies.get("url_list") || [] };
-  componentDidMount = () => {
-    console.log(this.props.cookies);
-  };
+
   add_url_to_list = (url) => {
     const url_list = [...this.state.url_list];
     url_list.push(url);
@@ -19,16 +18,20 @@ class Main extends Component {
     }
     console.log("list", url_list);
   };
-  delete_url_from_list = (id) => {
+  delete_url_from_list = async (id) => {
     const url_list = [...this.state.url_list];
-    let deleted = url_list.splice(id, 1);
+    let deleted = url_list.splice(id, 1)[0];
     this.setState({ url_list });
     if (Object.keys(this.props.cookies.cookies).length > 0) {
       this.props.cookies.set("url_list", url_list, {
         path: "/",
       });
     }
+    console.log(deleted);
+
+    const res = await axios.delete("shortner/delete", { data: deleted });
     console.log("list", url_list);
+    console.log(res);
   };
   render() {
     return (
