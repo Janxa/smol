@@ -1,24 +1,29 @@
 import "./App.css";
+import React, { useEffect, useState } from "react";
 import Main from "./components/Main.jsx";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import CookiesBanner from "./components/Cookies";
+import Popup from "./components/popups/Popup";
 import { useCookies } from "react-cookie";
 function App() {
   const [cookies, setCookie] = useCookies(["url_list"]);
-  function CreateCookie(url_list) {
-    console.log(cookies);
+  const [popup, setPopup] = useState({ visible: false, value: "" });
 
+  function CreateCookie(url_list) {
     setCookie("url_list", url_list, {
       path: "/",
     });
-    console.log(cookies);
+  }
+  function OpenPopup(popup) {
+    setPopup(popup);
+    console.log("clicked", { popup });
   }
   return (
     <div className="App">
       <Header />
       <Main CreateCookie={CreateCookie} />
-      <Footer />
+      <Footer OpenPopup={OpenPopup} />
+      <Popup popup={popup} />
     </div>
   );
 }
