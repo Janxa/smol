@@ -1,11 +1,13 @@
+from locale import currency
 import secrets
 
-from flask import make_response
-from backend.settings import domain_name
+from flask import current_app, make_response
 from backend.extensions import url_collection
-
+from flask_mail import Mail, Message
+from backend import mail
 
 def generate_url(long,alias,allowMod):
+    domain_name=(current_app.config['DOMAIN_NAME'])
     
     if alias == '':
         short = domain_name + secrets.token_urlsafe(7)
@@ -23,7 +25,8 @@ def generate_url(long,alias,allowMod):
     return {"short":short,"long":long}
         
 def get_long_url(short):
-    print(short)
+    domain_name=(current_app.config['DOMAIN_NAME'])
+    
     url_object = url_collection.find_one({"short":domain_name+short})
     print(url_object)
     if url_object != None:
@@ -41,3 +44,6 @@ def delete_url(short):
     except Exception as  error:
         return make_response(error,400)
         
+# def send_contact_email(message, recipent):
+#     msg = Message(message,recipents =[recipent] )
+#     mail.send(msg)

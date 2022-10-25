@@ -1,6 +1,9 @@
-from flask import Blueprint, request
+from flask import Blueprint, request,current_app
 from backend.services import generate_url ,delete_url
 from backend.extensions import url_collection
+
+
+
 
 shortner = Blueprint('shortner',__name__, url_prefix='/shortner')
 @shortner.route('/generate',methods=['POST'])
