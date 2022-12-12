@@ -9,9 +9,9 @@ class mongo_config():
 class app_config():
     DOMAIN_NAME=os.getenv("DOMAIN_NAME")    
     MAIL_PASSWORD = os.getenv("PASSWORD")
-    MAIL_SERVER="smtp.protonmail.com"
-    MAIL_PORT = 465
-    MAIL_USERNAME = os.getenv("CONTACT_EMAIL")
+    MAIL_SERVER=os.getenv("SMTP_SERVER")
+    MAIL_PORT = os.getenv("MAIL_PORT")
+    MAIL_USERNAME = os.getenv("MAIL_USERNAME")
     MAIL_DEFAULT_SENDER=os.getenv("CONTACT_EMAIL")
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True

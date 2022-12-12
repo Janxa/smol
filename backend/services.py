@@ -1,11 +1,10 @@
-from locale import currency
+
 import secrets
 
 from flask import current_app, make_response
-from backend.extensions import url_collection
+from backend.extensions import url_collection,mail
+from backend.settings import app_config
 from flask_mail import Mail, Message
-from backend import mail
-
 def generate_url(long,alias,allowMod):
     domain_name=(current_app.config['DOMAIN_NAME'])
     
@@ -44,6 +43,16 @@ def delete_url(short):
     except Exception as  error:
         return make_response(error,400)
         
-# def send_contact_email(message, recipent):
-#     msg = Message(message,recipents =[recipent] )
-#     mail.send(msg)
+def send_contact_email(mail_content,mail_sender):
+    email_object = f"New e-mail from {app_config.DOMAIN_NAME}'s contact form !"
+    try:
+        if len(mail_content) > 10000:
+           raise Exception("Mail too long") 
+           
+        msg = Message(email_object,sender =current_app.config["MAIL_DEFAULT_SENDER"],recipients = [current_app.config["MAIL_DEFAULT_SENDER"]])
+        msg.body = f"""message sent by {mail_sender}
+                        {mail_content}"""
+        mail.send(msg)
+        return  make_response("Email Successfully Sent",200)
+    except Exception as  error:
+        return make_response(str(error),400)
