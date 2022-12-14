@@ -8,21 +8,21 @@ function Footer(props) {
     <footer>
       <ul>
         <li
-          onClick={() => props.OpenPopup({ visible: true, value: <About /> })}
+          onClick={() => props.OpenPopup(About )}
         >
           About
         </li>
-        <li onClick={() => props.OpenPopup({ visible: true, value: <Help /> })}>
+        <li onClick={() => props.OpenPopup(Help )}>
           Help
         </li>
         <h3>SMOL</h3>
         <li
-          onClick={() => props.OpenPopup({ visible: true, value: <Privacy /> })}
+          onClick={() => props.OpenPopup( Privacy )}
         >
           Privacy
         </li>
         <li
-          onClick={() => props.OpenPopup({ visible: true, value: <Contact /> })}
+          onClick={() => props.OpenPopup(Contact )}
         >
           Contact
         </li>
