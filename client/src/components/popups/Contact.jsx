@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { useEffect } from "react";
+import {  toast } from 'react-toastify';
+import { useEffect,useState} from "react";
 import { contact_schema } from "../../joi_schemas/contact_schema"
-import { useState } from "react";
 import axios from "axios";
 
 function Contact(props) {
@@ -10,16 +10,23 @@ function Contact(props) {
   const [mail_content,setmail_content]= useState("")
   const [errors,setErrors]=useState({})
   const schema = contact_schema;
+
   const sendEmail= async (event)=>{
-    let new_errors= {...errors}
+    let new_errors= {}
     event.preventDefault();
     try {
     await schema.validateAsync({mail_sender:mail_sender,mail_content:mail_content},{abortEarly:false});
-    const res = await axios.post("contact/send", {mail_content,mail_sender});
+    const res = await toast.promise( axios.post("contact/send", {mail_content,mail_sender}),
+    {
+      pending: 'Loading',
+      success: '📧 Your email has been sent !',
+      error: '🤯 Error, could not send email '
+    }
+);
     console.log(res);
     setmail_sender("");
     setmail_content("");
-    props.ClosePopup();
+      props.ClosePopup();
   }catch (err){
     console.log(err)
     err.details.forEach(

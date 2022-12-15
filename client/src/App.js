@@ -1,4 +1,7 @@
 import "./App.css";
+import {  ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import React, { useEffect, useState } from "react";
 import Main from "./components/Main.jsx";
 import Header from "./components/Header";
@@ -27,6 +30,7 @@ function App() {
   }
   return (
     <div className="App">
+      <ToastContainer />
       <Header />
       <Main CreateCookie={CreateCookie} />
       <Footer OpenPopup={OpenPopup} />
