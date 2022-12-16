@@ -35,7 +35,8 @@ class Main extends Component {
   };
   render() {
     return (
-      <main>
+    <div className=" bg-stone-600  w-full flex justify-center ">
+      <main className=" bg-stone-200 w-10/12 p-4 m-4 rounded-md shadow-sm">
         <UrlForm
           add_url_to_list={this.add_url_to_list}
           url_list={this.state.url_list}
@@ -51,7 +52,7 @@ class Main extends Component {
           />
         )}
       </main>
-    );
+    </div>);
   }
 }
 

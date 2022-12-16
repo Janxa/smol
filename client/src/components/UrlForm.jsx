@@ -76,9 +76,10 @@ class UrlForm extends Component {
     const data = { ...this.state.data };
     return (
       <section>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} className="flex flex-col">
           <label htmlFor="url">Enter the url you want to shorten</label>
           <input
+            className="rounded-md shadow-sm "
             value={data.url}
             onChange={this.handleChange}
             name="url"
@@ -87,20 +88,24 @@ class UrlForm extends Component {
           {this.state.errors !== false && <p>{this.state.errors["url"]}</p>}
           <label htmlFor="alias">Customize your url</label>
           <input
+            className="rounded-md shadow-sm "
             value={data.alias}
             onChange={this.handleChange}
             name="alias"
             type="text"
-          />
+          /><div className="py-2"> 
+            <label htmlFor="allowmod">Allow non-strict mode for custom-named urls </label>
           <input
             type="checkbox"
             name="allowMod"
             checked={data.allowMod}
             onChange={this.handleCheck}
           />
+          </div>
+         
           {this.state.errors !== false && <p>{this.state.errors["alias"]}</p>}
 
-          <button type="submit">Make it SMOL !</button>
+          <button className="rounded-md bg-greenpear p-4 "type="submit">Make it SMOL !</button>
         </form>
         {Object.keys(this.state.last_url).length !== 0 && (
           <UrlPairs data={this.state.last_url} />

@@ -29,9 +29,9 @@ function App() {
 
   }
   return (
-    <div className="App">
+    <div className="flex flex-col ">
       <ToastContainer />
-      <Header />
+      <Header className="fixed" />
       <Main CreateCookie={CreateCookie} />
       <Footer OpenPopup={OpenPopup} />
       <Popup content={popup.content} visible={popup.visible} ClosePopup={ClosePopup} />
