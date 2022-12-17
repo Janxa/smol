@@ -13,7 +13,7 @@ function App() {
   const [cookieVisible,setCookieVisible]= useState(cookies.url_list?false:true)
   const [popup, setPopup] = useState({  content: "",visible: false});
   const [ url_list, setUrl_list]= useState(((cookies.url_list) || [] ));
-  console.log(cookies.url_list)
+
   function CreateCookie(url_list) {
     setCookie("url_list", url_list, {
       path: "/",
@@ -30,11 +30,12 @@ function App() {
    setPopup({content:"",visible:false});
   }
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col bg-stone-600 ">
       <ToastContainer />
       <Header className="fixed" />
-      <Main RefuseCookie={RefuseCookie} CreateCookie={CreateCookie} />
+      <Main url_list={url_list} setUrl_list={setUrl_list} RefuseCookie={RefuseCookie} CreateCookie={CreateCookie} />
       <Footer OpenPopup={OpenPopup} />
+      <Popup content={popup.content} visible={popup.visible} ClosePopup={ClosePopup} />
       { cookieVisible && (
           <CookiesBanner
             RefuseCookie={RefuseCookie}
@@ -42,7 +43,6 @@ function App() {
             url_list={url_list}
           />
         )}
-      <Popup content={popup.content} visible={popup.visible} ClosePopup={ClosePopup} />
     </div>
   );
 }

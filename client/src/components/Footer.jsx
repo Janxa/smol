@@ -5,7 +5,7 @@ import Help from "./popups/Help";
 import About from "./popups/About";
 function Footer(props) {
   return (
-    <footer>
+    <footer >
       <ul>
         <li
           onClick={() => props.OpenPopup(About )}
