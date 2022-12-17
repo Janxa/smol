@@ -105,7 +105,7 @@ class UrlForm extends Component {
          
           {this.state.errors !== false && <p>{this.state.errors["alias"]}</p>}
 
-          <button className="rounded-md bg-greenpear p-4 "type="submit">Make it SMOL !</button>
+          <button className="btn-validation self-center"type="submit">Make it SMOL !</button>
         </form>
         {Object.keys(this.state.last_url).length !== 0 && (
           <UrlPairs data={this.state.last_url} />

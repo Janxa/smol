@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .btn-validation {
+      @apply font-normal rounded-lg bg-greenpear
+      text-black
+        px-4 py-2  shadow-md shadow-greenpear-6
+        hover:shadow-greenpear-8 hover:shadow 
+         transition-all ease-in-out 
+          hover:bg-greenpear-5 duration-200
+    }
+  }

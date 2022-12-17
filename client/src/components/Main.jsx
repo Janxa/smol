@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import UrlForm from "./UrlForm";
 import Sidebar from "./Sidebar";
 import { withCookies } from "react-cookie";
-import CookiesBanner from "./Cookies";
 import axios from "axios";
 class Main extends Component {
   state = { url_list: this.props.cookies.get("url_list") || [] };
@@ -45,12 +44,7 @@ class Main extends Component {
           url_list={this.state.url_list}
           delete_url_from_list={this.delete_url_from_list}
         />
-        {Object.keys(this.props.cookies.cookies).length === 0 && (
-          <CookiesBanner
-            CreateCookie={this.props.CreateCookie}
-            url_list={this.state.url_list}
-          />
-        )}
+     
       </main>
     </div>);
   }
