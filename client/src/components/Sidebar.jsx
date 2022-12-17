@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import UrlPairs from "./UrlPairs";
 function Sidebar(props) {
   return (
-    <aside>
+    <aside className="hidden">
       <h3>Your recent smol urls</h3>
       <ul>
         {props.url_list.map((url_pair, id) => (

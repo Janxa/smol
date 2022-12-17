@@ -29,6 +29,9 @@ function App() {
   function ClosePopup(){
    setPopup({content:"",visible:false});
   }
+  function OpenSidebar(){
+
+  }
   return (
     <div className="flex flex-col bg-stone-600 ">
       <ToastContainer />
