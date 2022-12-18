@@ -5,12 +5,14 @@ import React, { useEffect, useState } from "react";
 import Main from "./components/Main.jsx";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Sidebar from "./components/Sidebar";
 import Popup from "./components/popups/Popup";
 import CookiesBanner from "./components/Cookies";
 import { useCookies,Cookies } from "react-cookie";
 function App() {
   const [cookies, setCookie] = useCookies(["url_list",]);
   const [cookieVisible,setCookieVisible]= useState(cookies.url_list?false:true)
+  const [sidebarVisible,setSidebarVisible]=useState(false)
   const [popup, setPopup] = useState({  content: "",visible: false});
   const [ url_list, setUrl_list]= useState(((cookies.url_list) || [] ));
 
@@ -29,13 +31,22 @@ function App() {
   function ClosePopup(){
    setPopup({content:"",visible:false});
   }
-  function OpenSidebar(){
-
+  function ToggleSidebar(){
+    if (sidebarVisible) {
+      setSidebarVisible(false)
+    }
+    else{
+      setSidebarVisible(true)
+    }
   }
   return (
     <div className="flex flex-col bg-stone-600 ">
       <ToastContainer />
-      <Header className="fixed" />
+      <Header className="fixed" ToggleSidebar={ToggleSidebar}/>
+      <Sidebar
+        url_list={url_list}
+        visible={sidebarVisible}
+      />
       <Main url_list={url_list} setUrl_list={setUrl_list} RefuseCookie={RefuseCookie} CreateCookie={CreateCookie} />
       <Footer OpenPopup={OpenPopup} />
       <Popup content={popup.content} visible={popup.visible} ClosePopup={ClosePopup} />

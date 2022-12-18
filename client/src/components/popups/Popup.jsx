@@ -1,12 +1,14 @@
 import React  ,{useRef, useEffect} from "react";
 function Popup(props) {
-
+  const {ClosePopup,Content,visible} = props;
   const PopupRef = useRef(null);
 
   useEffect(() => {
       function handleClickOutside(event) {
+        console.log(PopupRef)
+
         if (PopupRef.current && !PopupRef.current.contains(event.target)) {
-          props.ClosePopup()
+          ClosePopup()
         }
       }
       document.addEventListener("mousedown", handleClickOutside);
@@ -16,8 +18,7 @@ function Popup(props) {
     }, [PopupRef]);
   
 
-  const Content=props.content;
-  const visible = props.visible;
+  
   
 
   return( (visible) ? (
