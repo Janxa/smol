@@ -33,12 +33,14 @@ function Sidebar(props) {
           ?(url_list.map((url_pair, id) => (
             <li key={id} className="">
               <UrlPairs data={url_pair} />
-              <button onClick={null}>
+              <div className="py-2 flex justify-around w-2/3">
+              <button className="btn-validation" onClick={null}>
                 Copy Smol url
               </button>
-              <button onClick={() => delete_url_from_list(id)}>
+              <button className="btn-danger" onClick={() => delete_url_from_list(id)}>
                 Delete url
               </button>
+              </div>
             </li>
              )))
          :<li className=" text-l pt-8 place-self-center">No urls saved yet</li>}
