@@ -9,7 +9,7 @@ function UrlForm(props) {
   const [lastUrl,setLastUrl] =useState({})
   const [errors,setErrors]=useState({})
   const schema = url_schema;
-
+  console.log(errors)
   const handleChange = ({ currentTarget: input }) => {
     setData( (data)=>{
       return{
@@ -52,27 +52,27 @@ function UrlForm(props) {
     }
   };
   return ( 
-
+    
       <section>
         <form onSubmit={handleSubmit} className="flex flex-col">
-          <label htmlFor="url" className="pt-2 text-lg text-stone-900">Enter the url you want to shorten</label>
+          <label htmlFor="url" className="pt-2 text-lg text-stone-900">Enter the url you want to shorten :</label>
           <input
-            className="rounded-md shadow-sm p-4  bg-stone-50 focus:bg-white focus:outline-none focus:shadow-sm focus:shadow-stone-400  "
+            className={errors['url'] ?"input-invalid" : "rounded-md shadow-sm p-4  bg-stone-50 focus:bg-white focus:outline-none focus:shadow-sm focus:shadow-stone-400"}
             value={data.url}
             onChange={handleChange}
             name="url"
             type="text"
           />
-          {errors['url']  && <p>{errors["url"]}</p>}
-          <label htmlFor="alias" className="pt-2 text-lg text-stone-900">Customize your url</label>
+          {errors['url']  && <p className="text-primary-red font-medium">{errors["url"]}</p>}
+          <label htmlFor="alias" className="pt-2 text-lg text-stone-900">Customize your url :</label>
           <input
-            className="rounded-md shadow-sm p-4  bg-stone-50 focus:bg-white focus:outline-none focus:shadow-sm focus:shadow-stone-400  "
+            className={errors['alias'] ? "input-invalid" :"rounded-md shadow-sm p-4  bg-stone-50 focus:bg-white focus:outline-none focus:shadow-sm focus:shadow-stone-400 "}
             value={data.alias}
             onChange={handleChange}
             name="alias"
             type="text"
           /><div className="py-2"> 
-            {errors['alias']&& <p>{errors["alias"]}</p>}
+            {errors['alias']&& <p  className="text-primary-red  font-medium">{errors["alias"]}</p>}
             <label htmlFor="allowmod" className="pt-2 text-stone-900">Allow non-strict mode for custom-named urls </label>
           <input
             className="accent-primary-green"

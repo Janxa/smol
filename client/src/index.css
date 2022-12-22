@@ -15,4 +15,18 @@
       active:shadow-primary-brown-2 active:shadow-inner
       transition-all ease-in-out duration-200
     }
+    .input-invalid{
+      @apply 
+      outline
+      outline-2
+      outline-primary-red
+      rounded-md 
+      shadow-sm 
+      p-4  
+    bg-stone-50 
+    focus:bg-white 
+      focus:border-none
+      focus:outline-none 
+      focus:shadow-sm 
+    focus:shadow-stone-400}
   };
