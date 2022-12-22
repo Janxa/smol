@@ -5,20 +5,19 @@ module.exports = {
   theme: {
     extend: {
       colors:
-      {'greenpear':'#87FF65',
-      'greenpear-2':'#6FFF47',
-      'greenpear-3':'#4FFF1F',
-      'greenpear-4':'#35F500',
-      'greenpear-5':'#41AF1D',
-      'greenpear-6':'#348C17',
-      'greenpear-7':'#276911',
-      'greenpear-8':'#1A460B',
-      'greenpear-9':'#0D2306',
-        'opal':'#9DC7C8',
-        'redalert':'#af1b3f',
-        'mint-1':'#BFFFAE',
-        'mint-2':'#DFFFD7'}
-      ,},
+
+      {'primary-green':'#157F1F', 
+      'primary-green-2':'#116a19',
+      'primary-black':'#1C1917',
+      'primary-red':'#A8201A',
+      'primary-grey-light':'#A8A29E',
+      'primary-brown-2':'#57534E',
+      'primary-white':"#eceaea",
+      'primary-brown':'#292524',
+      'secondary-yellow':'#FFFC99'
+      },
+    
   },
+},
   plugins: [],
 }

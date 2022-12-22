@@ -20,6 +20,7 @@ function App() {
     setCookie("url_list", url_list, {
       path: "/",
     });
+    
     setCookieVisible(false);
   }
   function RefuseCookie(){
@@ -39,17 +40,32 @@ function App() {
       setSidebarVisible(true)
     }
   }
+  console.log("cooks",cookies)
   return (
-    <div className="flex flex-col bg-stone-600 ">
+    <div className="flex flex-col h-screen bg-stone-600 ">
       <ToastContainer />
-      <Header className="fixed" ToggleSidebar={ToggleSidebar}/>
+      <Header ToggleSidebar={ToggleSidebar}/>
+
       <Sidebar
         url_list={url_list}
         visible={sidebarVisible}
+        cookieVisible={cookieVisible}
       />
-      <Main url_list={url_list} setUrl_list={setUrl_list} RefuseCookie={RefuseCookie} CreateCookie={CreateCookie} />
+
+      <Main 
+      url_list={url_list}
+      setUrl_list={setUrl_list}
+      RefuseCookie={RefuseCookie}
+      CreateCookie={CreateCookie} 
+      />
+      
       <Footer OpenPopup={OpenPopup} />
-      <Popup content={popup.content} visible={popup.visible} ClosePopup={ClosePopup} />
+      <Popup 
+      content={popup.content}
+      visible={popup.visible}
+      ClosePopup={ClosePopup}
+      />
+      
       { cookieVisible && (
           <CookiesBanner
             RefuseCookie={RefuseCookie}

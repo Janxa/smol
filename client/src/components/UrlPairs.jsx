@@ -2,12 +2,8 @@ import React, { Component } from "react";
 function UrlPairs(props) {
   return (
     <div>
-      <p>
-        Long | <a href={props.data.long}>{props.data.long}</a>
-      </p>
-      <p>
-        Short | <a href={props.data.long}>{props.data.short}</a>
-      </p>
+      <p onClick={null}>{props.data.short}</p>
+      <a href={props.data.long}>{props.data.long}</a>
     </div>
   );
 }

@@ -4,11 +4,15 @@
 
 @layer components {
     .btn-validation {
-      @apply font-normal rounded-lg bg-greenpear
-      text-black
-        px-4 py-2  shadow-md shadow-greenpear-6
-        hover:shadow-greenpear-8 hover:shadow 
-         transition-all ease-in-out 
-          hover:bg-greenpear-5 duration-200
+      @apply 
+      font-medium rounded-lg 
+      px-4 py-2 
+      bg-primary-green
+      text-primary-white
+      shadow
+      hover:bg-primary-green-2
+      shadow-primary-brown
+      active:shadow-primary-brown-2 active:shadow-inner
+      transition-all ease-in-out duration-200
     }
-  }
+  };
