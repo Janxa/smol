@@ -63,7 +63,7 @@ function UrlForm(props) {
             name="url"
             type="text"
           />
-          {errors['url']  && <p className="text-primary-red font-medium">{errors["url"]}</p>}
+          {errors['url']  && <p className="text-primary-red py-1 font-medium">{errors["url"]}</p>}
           <label htmlFor="alias" className="pt-2 text-lg text-stone-900">Customize your url :</label>
           <input
             className={errors['alias'] ? "input-invalid" :"rounded-md shadow-sm p-4  bg-stone-50 focus:bg-white focus:outline-none focus:shadow-sm focus:shadow-stone-400 "}
@@ -71,8 +71,10 @@ function UrlForm(props) {
             onChange={handleChange}
             name="alias"
             type="text"
-          /><div className="py-2"> 
-            {errors['alias']&& <p  className="text-primary-red  font-medium">{errors["alias"]}</p>}
+            />
+            {errors['alias']&& <p  className="text-primary-red py-1 font-medium">{errors["alias"]}</p>}
+          
+          <div className="py-2"> 
             <label htmlFor="allowmod" className="pt-2 text-stone-900">Allow non-strict mode for custom-named urls </label>
           <input
             className="accent-primary-green"
