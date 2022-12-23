@@ -8,7 +8,7 @@ const Header = ({ToggleSidebar}) => {
         <h2 className="text-secondary-yellow text-xl" >Your urls, SMOLER</h2>
       </div>
       <div className="w-1/3 h-3/5 flex flex-col justify-around items-end ">
-      <button onClick={ToggleSidebar} className="w-1/2 rounded-md px-2 h-full flex flex-col justify-around items-center hover:scale-105 transition-transform ease-in-out duration-100">
+      <button onClick={ToggleSidebar} className="w-1/2 rounded-md px-2 h-full flex flex-col justify-around items-center hover:brightness-75 transition-all ease-in-out duration-100 active:scale-95">
         <div className="bg-secondary-yellow rounded-md w-full h-[10%] inline-block"></div>
         <div className="bg-secondary-yellow rounded-md w-full h-[10%] inline-block"></div>
         <div className="bg-secondary-yellow rounded-md w-full h-[10%] inline-block"></div>
