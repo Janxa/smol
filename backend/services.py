@@ -9,15 +9,15 @@ def generate_url(long,alias,allowMod):
     domain_name=(current_app.config['DOMAIN_NAME'])
     
     if alias == '':
-        short = domain_name + secrets.token_urlsafe(7)
+        short = domain_name +'/'+ secrets.token_urlsafe(7)
         while url_collection.find_one({"short":short}) != None:
-            short = domain_name + secrets.token_urlsafe(7)
+            short = domain_name  +'/'+ secrets.token_urlsafe(7)
     else:
-        short= domain_name+alias
+        short= domain_name+'/'+alias
         if url_collection.find_one({"short":short}) != None:
             print("invalid name, already taken")
             if allowMod==True:
-                short = domain_name +alias+"/" +secrets.token_urlsafe(7)
+                short = domain_name +'/'+alias+"/" +secrets.token_urlsafe(7)
             else:
                 return 'error'
     url_collection.insert_one({"short":short,"long":long})
