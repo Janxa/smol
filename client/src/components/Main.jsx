@@ -9,13 +9,6 @@ const Main = (props) => {
     const new_url_list = [...url_list];
     new_url_list.push(url);
     setUrl_list(new_url_list)
-    if (Object.keys(cookies.cookies).length > 0) {
-      console.log("cookie called")
-      cookies.set("url_list", url_list, {
-        path: "/",
-      });
-    }
-    console.log("list", url_list);
   };
 
   return ( 

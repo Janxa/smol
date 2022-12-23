@@ -1,29 +1,27 @@
-import React, { Component,useRef} from "react";
-import { axios } from "axios";
+import React, { Component,useEffect,useRef} from "react";
+import axios  from "axios";
 import UrlPairs from "./UrlPairs";
+import { withCookies } from "react-cookie";
 function Sidebar(props) {
-  const {url_list,setUrl_list,cookies,visible,cookieVisible} = props
+  const {url_list,setUrl_list,cookies,visible} = props
   console.log("sidebar",url_list)
+  
   const delete_url_from_list = async (id) => {
     const new_url_list = [...url_list];
-    let deleted = url_list.splice(id, 1)[0];
-    setUrl_list(new_url_list)
-    if (Object.keys(cookies.cookies).length > 0) {
-      cookies.set("url_list", url_list, {
-        path: "/",
-      });
-    }
-    console.log(deleted);
-
+    let deleted = new_url_list.splice(id, 1)[0];
+    console.log('deleted',deleted);
+    // trycatch here to check server before updating cookie
     const res = await axios.delete("shortner/delete", { data: deleted });
+    setUrl_list(new_url_list)
     console.log("list", url_list);
     console.log(res);
   };
-  
+
+
   return (
     <aside  className={visible 
-      ? "fixed top-24 right-0 h-screen w-full bg-stone-200 opacity-100 transition-transform flex flex-col p-4"
-      : "opacity-0 fixed top-24 right-0 translate-x-full h-screen w-full bg-stone-200 flex flex-col transition-all p-4"
+      ? "opacity-100 fixed top-24 right-0 h-screen w-full translate-x-0 bg-stone-200 flex flex-col transition-[transform,opacity]  ease-in duration-300  p-4"
+      : "opacity-0 fixed top-24 right-0  h-screen w-full  translate-x-full bg-stone-200 flex flex-col transition-[transform,opacity] ease-in duration-300 p-4"
       }>
 
       <h3 className="text-2xl font-medium">Your recent smol urls</h3>
@@ -50,4 +48,4 @@ function Sidebar(props) {
   );
 }
 
-export default Sidebar;
+export default withCookies(Sidebar);
