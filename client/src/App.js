@@ -10,12 +10,20 @@ import Popup from "./components/popups/Popup";
 import CookiesBanner from "./components/Cookies";
 import { useCookies,Cookies } from "react-cookie";
 function App() {
-  const [cookies, setCookie] = useCookies(["url_list",]);
+  const [cookies, setCookie] = useCookies([]);
   const [cookieVisible,setCookieVisible]= useState(cookies.url_list?false:true)
   const [sidebarVisible,setSidebarVisible]=useState(false)
   const [popup, setPopup] = useState({  content: "",visible: false});
   const [ url_list, setUrl_list]= useState(((cookies.url_list) || [] ));
 
+  useEffect(()=>{
+    if (Object.keys(cookies).length > 0) {
+      setCookie("url_list", url_list, {
+        path: "/",
+      });
+    }
+  },[url_list]
+    )
   function CreateCookie(url_list) {
     setCookie("url_list", url_list, {
       path: "/",
@@ -48,6 +56,7 @@ function App() {
 
       <Sidebar
         url_list={url_list}
+        setUrl_list={setUrl_list}
         visible={sidebarVisible}
         cookieVisible={cookieVisible}
       />
@@ -55,8 +64,7 @@ function App() {
       <Main 
       url_list={url_list}
       setUrl_list={setUrl_list}
-      RefuseCookie={RefuseCookie}
-      CreateCookie={CreateCookie} 
+    
       />
       
       <Footer OpenPopup={OpenPopup} />
