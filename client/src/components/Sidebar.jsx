@@ -11,6 +11,7 @@ function Sidebar(props) {
     let deleted = new_url_list.splice(id, 1)[0];
     console.log('deleted',deleted);
     // trycatch here to check server before updating cookie
+    
     const res = await axios.delete("shortner/delete", { data: deleted });
     setUrl_list(new_url_list)
     console.log("list", url_list);
@@ -20,18 +21,18 @@ function Sidebar(props) {
 
   return (
     <aside  className={visible 
-      ? "opacity-100 fixed top-24 right-0 h-screen w-full translate-x-0 bg-stone-200 flex flex-col transition-[transform,opacity]  ease-in duration-300  p-4"
-      : "opacity-0 fixed top-24 right-0  h-screen w-full  translate-x-full bg-stone-200 flex flex-col transition-[transform,opacity] ease-in duration-300 p-4"
+      ? "opacity-100 fixed z-10 top-24 right-0 h-screen w-full translate-x-0 bg-stone-200 flex flex-col transition-[transform,opacity]  ease-in duration-300  p-4"
+      : "opacity-0 z-10 fixed top-24 right-0  h-screen w-full  translate-x-full bg-stone-200 flex flex-col transition-[transform,opacity] ease-in duration-300 p-4"
       }>
 
-      <h3 className="text-2xl font-medium">Your recent smol urls</h3>
+      <h3 className="text-2xl  font-medium">Your recent smol urls</h3>
       <ul className="flex flex-col h-full">
         {/* If there's a url in the list, render list, else render no urls */}
         {url_list.length >0 
           ?(url_list.map((url_pair, id) => (
-            <li key={id} className="">
+            <li key={id} className=" py-2 border-b-2 border-primary-brown-2">
               <UrlPairs data={url_pair} />
-              <div className="py-2 flex justify-around w-2/3">
+              <div className="pb-2 pt-3 flex justify-around w-2/3">
               <button className="btn-validation" onClick={null}>
                 Copy Smol url
               </button>
