@@ -6,7 +6,6 @@ const Joi = require("joi");
 
 function UrlForm(props) {
   const [data,setData] = useState( { url: "", alias: "", allowMod: false });
-  const [lastUrl,setLastUrl] =useState({})
   const [errors,setErrors]=useState({})
   const schema = url_schema;
   console.log(errors)
@@ -42,18 +41,20 @@ function UrlForm(props) {
       const res = await axios.post("shortner/generate", data);
       props.add_url_to_list(res.data);
       lastUrl = res.data;
-      setLastUrl(lastUrl );
+      props.setLastUrl(lastUrl );
+      setData({ url: "", alias: "", allowMod: false })
     } catch (err) {
       console.log(err);
       err.details.forEach(
         (error) => (errors[error.context.label] = error.message)
       );
-      setErrors(errors );
     }
+    setErrors(errors )
   };
   return ( 
     
-      <section>
+    <section className=" bg-stone-200 w-10/12 p-4 m-4 rounded-md shadow-sm">
+   
         <form onSubmit={handleSubmit} className="flex flex-col">
           <label htmlFor="url" className="pt-2 text-lg text-stone-900">Enter the url you want to shorten :</label>
           <input
@@ -74,8 +75,9 @@ function UrlForm(props) {
             />
             {errors['alias']&& <p  className="text-primary-red py-1 font-medium">{errors["alias"]}</p>}
           
-          <div className="py-2"> 
-            <label htmlFor="allowmod" className="pt-2 text-stone-900">Allow non-strict mode for custom-named urls </label>
+          <div className="py-2 z-0 relative"> 
+            <label htmlFor="allowmod" className="pt-2 text-stone-900 hover:cursor-help peer ">Allow non-strict mode for custom-named urls </label>
+            <span className=" invisible peer-hover:visible opacity-0 peer-hover:opacity-100 duration-300 hover:visible hover:opacity-100 botom-full bg-stone-900 w-3/4  py-1 px-2 text-center rounded-2xl text-white text-sm  transition-all ease-in absolute">Add characters at the end of your url if your custom url has already been taken.</span>
           <input
             className="accent-primary-green"
             type="checkbox"
@@ -88,9 +90,6 @@ function UrlForm(props) {
 
           <button className="btn-validation self-center"type="submit">Make it SMOL !</button>
         </form>
-        {Object.keys(lastUrl).length !== 0 && (
-          <UrlPairs data={lastUrl} />
-        )}
       </section>
     
   );
