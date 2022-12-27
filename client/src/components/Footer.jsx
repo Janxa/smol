@@ -8,7 +8,7 @@ function Footer(props) {
   return (
     <footer className="bg-primary-brown fixed bottom-0  w-full" >
       <ul className="flex justify-around items-center [&>*]:text-primary-white [&>*]:cursor-pointer ">
-        <li className=""
+        <li
           onClick={() => OpenPopup(About)}
         >
           About
