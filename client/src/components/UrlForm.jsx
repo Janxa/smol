@@ -8,7 +8,6 @@ function UrlForm(props) {
   const [data,setData] = useState( { url: "", alias: "", allowMod: false });
   const [errors,setErrors]=useState({})
   const schema = url_schema;
-  console.log(errors)
   const handleChange = ({ currentTarget: input }) => {
     setData( (data)=>{
       return{
@@ -58,22 +57,22 @@ function UrlForm(props) {
         <form onSubmit={handleSubmit} className="flex flex-col">
           <label htmlFor="url" className="pt-2 text-lg text-stone-900">Enter the url you want to shorten :</label>
           <input
-            className={errors['url'] ?"input-invalid" : "rounded-md shadow-sm p-4  bg-stone-50 focus:bg-white focus:outline-none focus:shadow-sm focus:shadow-stone-400"}
+            className={errors['url'] ?"input-invalid" : "input"}
             value={data.url}
             onChange={handleChange}
             name="url"
             type="text"
           />
-          {errors['url']  && <p className="text-primary-red py-1 font-medium">{errors["url"]}</p>}
+          {errors['url']  && <p className="error-label">{errors["url"]}</p>}
           <label htmlFor="alias" className="pt-2 text-lg text-stone-900">Customize your url :</label>
           <input
-            className={errors['alias'] ? "input-invalid" :"rounded-md shadow-sm p-4  bg-stone-50 focus:bg-white focus:outline-none focus:shadow-sm focus:shadow-stone-400 "}
+            className={errors['alias'] ? "input-invalid" :"input"}
             value={data.alias}
             onChange={handleChange}
             name="alias"
             type="text"
             />
-            {errors['alias']&& <p  className="text-primary-red py-1 font-medium">{errors["alias"]}</p>}
+            {errors['alias']&& <p  className="error-label">{errors["alias"]}</p>}
           
           <div className="py-2 z-0 relative"> 
             <label htmlFor="allowmod" className="pt-2 text-stone-900 hover:cursor-help peer ">Allow non-strict mode for custom-named urls </label>
