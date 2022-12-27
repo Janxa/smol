@@ -44,15 +44,15 @@ function Contact(props) {
    }
   )
   return (
-  <>  <form onSubmit={sendEmail}  >
-      <h3>Contact</h3>
+  <>  <form onSubmit={sendEmail} className="flex flex-col w-full h-full overflow-hidden p-2" >
+      <h3 className="text-2xl">Contact</h3>
       <p>Any question ? Send me an e-mail through this form and i'll answer you asap !</p>
       <label for="mail_sender" title="So I can answer your mail !">Your email adress :</label>
-      <input type="text"  name="mail_sender" id="mail_sender" value={mail_sender} onChange={(e) =>setmail_sender(e.target.value)} />
-      {errors !== false && <p>{errors["mail_sender"]}</p>}
+      <input className={errors["mail_sender"] ? "input-invalid":"input"} type="text"  name="mail_sender" id="mail_sender" value={mail_sender} onChange={(e) =>setmail_sender(e.target.value)} />
+      {errors["mail_sender"] && <p className="error-label">{errors["mail_sender"]}</p>}
 
       <label for="contact_message" title="Cant exceed 10 000 characters" >Your Message :</label>
-      <textarea
+      <textarea className={errors["mail_sender"] ? "input-invalid":"input"}
         name="contact_message"
         id="contact_message"
         cols="30"
@@ -61,12 +61,11 @@ function Contact(props) {
         onChange={(e) =>setmail_content(e.target.value)}
         
       ></textarea>
-      {errors !== false && <p>{errors["mail_content"]}</p>}
+      {errors["mail_content"] && <p className="error-label">{errors["mail_content"]}</p>}
 
-      <input type="submit" value="Submit" />
+      <input type="submit" value="Send Email !" className="btn-validation mt-2"/>
 
     </form>
-      <button onClick={props.ClosePopup} >Close</button>
       </>
   );
 }
