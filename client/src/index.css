@@ -27,6 +27,17 @@
       active:shadow-primary-brown-2 active:shadow-inner
       transition-all ease-in-out duration-200
     }
+    .input{
+      @apply
+      rounded-md
+      shadow-sm 
+      p-4
+      bg-stone-50
+      focus:bg-white 
+      focus:outline-none
+      focus:shadow-sm 
+      focus:shadow-stone-400
+    }
     .input-invalid{
       @apply 
       outline
@@ -41,7 +52,12 @@
       focus:outline-none 
       focus:shadow-sm 
     focus:shadow-stone-400}
-  };
-
-
   
+  .error-label{
+    @apply
+    text-primary-red
+    py-1
+    font-medium
+  };
+};
+
