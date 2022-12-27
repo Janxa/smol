@@ -13,7 +13,7 @@ function App() {
   const [cookies, setCookie] = useCookies([]);
   const [cookieVisible,setCookieVisible]= useState(cookies.url_list?false:true)
   const [sidebarVisible,setSidebarVisible]=useState(false)
-  const [popup, setPopup] = useState({  content: "",visible: false});
+  const [popup, setPopup] = useState({  content: null,visible: false});
   const [ url_list, setUrl_list]= useState(((cookies.url_list) || [] ));
 
   useEffect(()=>{
@@ -35,10 +35,11 @@ function App() {
     setCookieVisible(false);
   }
   function OpenPopup(content) {
+   console.log(popup)
     setPopup({content:content,visible:true});
   }
   function ClosePopup(){
-   setPopup({content:"",visible:false});
+   setPopup({content:null,visible:false});
   }
   function ToggleSidebar(){
     if (sidebarVisible) {
@@ -68,11 +69,14 @@ function App() {
       />
       
       <Footer OpenPopup={OpenPopup} />
+      
+      {popup.visible &&
       <Popup 
-      content={popup.content}
+      Content={popup.content}
       visible={popup.visible}
       ClosePopup={ClosePopup}
       />
+}
       
       { cookieVisible && (
           <CookiesBanner
