@@ -3,19 +3,19 @@ import axios  from "axios";
 import UrlPairs from "./UrlPairs";
 import { withCookies } from "react-cookie";
 function Sidebar(props) {
-  const {url_list,setUrl_list,cookies,visible} = props
-  console.log("sidebar",url_list)
+  const {url_list,setUrl_list,cookies,visible} = props;
+
   
   const delete_url_from_list = async (id) => {
     const new_url_list = [...url_list];
     let deleted = new_url_list.splice(id, 1)[0];
-    console.log('deleted',deleted);
+    
     // trycatch here to check server before updating cookie
     
     const res = await axios.delete("shortner/delete", { data: deleted });
     setUrl_list(new_url_list)
-    console.log("list", url_list);
-    console.log(res);
+    
+    
   };
 
 
