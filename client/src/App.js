@@ -34,10 +34,17 @@ function App() {
   function RefuseCookie(){
     setCookieVisible(false);
   }
+  
   function OpenPopup(content) {
-   console.log(popup)
-    setPopup({content:content,visible:true});
+    // setPopup({content:content,visible:true})
+    if (popup.content==content){
+      return
+    }
+     if (popup.visible){
+       setTimeout(()=>setPopup({content:content,visible:true}),400);}
+     else {setPopup({content:content,visible:true})};
   }
+   
   function ClosePopup(){
    setPopup({content:null,visible:false});
   }
@@ -49,7 +56,6 @@ function App() {
       setSidebarVisible(true)
     }
   }
-  console.log("cooks",cookies)
   return (
     <div className="flex flex-col h-screen bg-stone-600 ">
       <ToastContainer />
@@ -69,7 +75,7 @@ function App() {
       />
       
       <Footer OpenPopup={OpenPopup} />
-      
+
       {popup.visible &&
       <Popup 
       Content={popup.content}
