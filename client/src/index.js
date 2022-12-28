@@ -4,10 +4,22 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { CookiesProvider } from "react-cookie";
+import {
+  Route,Routes,
+  BrowserRouter,
+} from "react-router-dom";
+import Redirection from "./components/Redirection";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   <CookiesProvider>
-    <App />
+    <BrowserRouter>
+    <Routes>
+      <Route element={<App />} path="/" />
+      <Route element={<Redirection />} path="/:short"/>
+      </Routes>
+    </BrowserRouter>
   </CookiesProvider>
 );
 
