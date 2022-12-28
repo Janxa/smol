@@ -10,6 +10,8 @@ import Popup from "./components/popups/Popup";
 import CookiesBanner from "./components/Cookies";
 import { useCookies,Cookies } from "react-cookie";
 function App() {
+
+
   const [cookies, setCookie] = useCookies([]);
   const [cookieVisible,setCookieVisible]= useState(cookies.url_list?false:true)
   const [sidebarVisible,setSidebarVisible]=useState(false)
@@ -59,7 +61,7 @@ function App() {
   return (
     <div className="flex flex-col h-screen bg-stone-600 ">
       <ToastContainer />
-      <Header ToggleSidebar={ToggleSidebar}/>
+      <Header ToggleSidebar={ToggleSidebar} sidebarVisible={sidebarVisible}/>
 
       <Sidebar
         url_list={url_list}
