@@ -7,7 +7,7 @@ function Footer(props) {
   const {OpenPopup} = props;
   return (
     <footer className="bg-primary-brown fixed bottom-0  w-full" >
-      <ul className="flex justify-around items-center [&>*]:text-primary-white [&>*]:cursor-pointer ">
+      <ul className="flex justify-around items-center [&>*]:text-primary-white [&>*:hover]:scale-105 [&>*:hover]:text-secondary-yellow [&>*]:cursor-pointer ">
         <li
           onClick={() => OpenPopup(About)}
         >
