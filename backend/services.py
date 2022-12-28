@@ -25,9 +25,7 @@ def generate_url(long,alias,allowMod):
         
 def get_long_url(short):
     domain_name=(current_app.config['DOMAIN_NAME'])
-    
-    url_object = url_collection.find_one({"short":domain_name+short})
-    print(url_object)
+    url_object = url_collection.find_one({"short":domain_name+'/'+short})
     if url_object != None:
         return url_object['long']
     else:
