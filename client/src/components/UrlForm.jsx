@@ -76,7 +76,7 @@ function UrlForm(props) {
           
           <div className="py-2 z-0 relative"> 
             <label htmlFor="allowmod" className="pt-2 text-stone-900 hover:cursor-help peer ">Allow non-strict mode for custom-named urls </label>
-            <span className=" invisible peer-hover:visible opacity-0 peer-hover:opacity-100 duration-300 hover:visible hover:opacity-100 botom-full bg-stone-900 w-3/4  py-1 px-2 text-center rounded-2xl text-white text-sm  transition-all ease-in absolute">Add characters at the end of your url if your custom url has already been taken.</span>
+            <span className=" invisible peer-hover:visible opacity-0 peer-hover:opacity-100 duration-300   bg-stone-900 w-3/4  py-1 px-2 text-center rounded-2xl text-white text-sm  transition-all ease-in absolute">Add characters at the end of your url if your custom url has already been taken.</span>
           <input
             className="accent-primary-green"
             type="checkbox"
