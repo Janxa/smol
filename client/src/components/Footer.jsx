@@ -6,7 +6,7 @@ import About from "./popups/About";
 function Footer(props) {
   const {OpenPopup} = props;
   return (
-    <footer className="bg-primary-brown fixed bottom-0  w-full" >
+    <footer className="bg-primary-brown absolute bottom-0 z-20  w-full" >
       <ul className="flex justify-around items-center [&>*]:text-primary-white [&>*:hover]:scale-105 [&>*:hover]:text-secondary-yellow [&>*]:cursor-pointer ">
         <li
           onClick={() => OpenPopup(About)}
