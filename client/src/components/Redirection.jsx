@@ -1,5 +1,4 @@
 import React from "react";
-import "./spinner.css";
 import redirect from "../services/redirectService";
 import { useEffect } from "react";
 export default function Redirection() {
