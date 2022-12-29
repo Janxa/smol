@@ -19,7 +19,7 @@ function Popup(props) {
 
     useEffect(()=>{
     if (visible){
-    setTimeout(()=>PopupRef.current.className="scale-100 rounded-lg p-4 top-1/2 left-1/2 h-5/6 w-5/6 fixed z-50  -translate-x-1/2 -translate-y-1/2 absolute bg-stone-200 transition-transform ease-in duration-300",10)
+    setTimeout(()=>PopupRef.current.className="scale-100  rounded-lg p-4 top-1/2 left-1/2 h-5/6 w-5/6 fixed z-50  -translate-x-1/2 -translate-y-1/2 absolute bg-stone-200 transition-transform ease-in duration-300",10)
     }},[visible],
  
     )
