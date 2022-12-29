@@ -87,7 +87,7 @@ function UrlForm(props) {
           </div>
          
 
-          <button className="btn-validation self-center"type="submit">Make it SMOL !</button>
+          <button className="btn-validation z-0 self-center"type="submit">Make it SMOL !</button>
         </form>
       </section>
     
