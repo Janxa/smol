@@ -44,8 +44,8 @@ function Contact(props) {
    }
   )
   return (
-  <>  <form onSubmit={sendEmail} className="flex flex-col w-full h-full overflow-hidden p-2" >
-      <h3 className="text-2xl">Contact</h3>
+   <form onSubmit={sendEmail} className="[&>*]:p-1 flex flex-col w-full h-full overflow-hidden p-2" >
+      <h3 className="text-2xl font-medium text-primary-brown">Contact</h3>
       <p>Any question ? Send me an e-mail through this form and i'll answer you asap !</p>
       <label for="mail_sender" title="So I can answer your mail !">Your email adress :</label>
       <input className={errors["mail_sender"] ? "input-invalid":"input"} type="text"  name="mail_sender" id="mail_sender" value={mail_sender} onChange={(e) =>setmail_sender(e.target.value)} />
@@ -66,7 +66,7 @@ function Contact(props) {
       <input type="submit" value="Send Email !" className="btn-validation mt-2"/>
 
     </form>
-      </>
+      
   );
 }
 
