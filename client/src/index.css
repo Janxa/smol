@@ -32,6 +32,7 @@
       rounded-md
       shadow-sm 
       p-4
+      lg:my-2
       bg-stone-50
       focus:bg-white 
       focus:outline-none
@@ -46,6 +47,8 @@
       rounded-md 
       shadow-sm 
       p-4  
+      lg:my-2
+
     bg-stone-50 
     focus:bg-white 
       focus:border-none
