@@ -52,10 +52,10 @@ function UrlForm(props) {
   };
   return ( 
     
-    <section className=" bg-stone-200 w-10/12 p-4 m-4 rounded-md shadow-sm">
+    <section className=" bg-stone-200 w-10/12 p-4 m-4 rounded-md shadow-sm md:w-9/12 lg:w-2/3  ">
    
         <form onSubmit={handleSubmit} className="flex flex-col">
-          <label htmlFor="url" className="pt-2 text-lg text-stone-900">Enter the url you want to shorten :</label>
+          <label htmlFor="url" className="pt-2 text-lg lg:text-xl lg:pt-4 text-stone-900">Enter the url you want to shorten :</label>
           <input
             className={errors['url'] ?"input-invalid" : "input"}
             value={data.url}
@@ -64,7 +64,7 @@ function UrlForm(props) {
             type="text"
           />
           {errors['url']  && <p className="error-label">{errors["url"]}</p>}
-          <label htmlFor="alias" className="pt-2 text-lg text-stone-900">Customize your url :</label>
+          <label htmlFor="alias" className="pt-2 lg:text-xl lg:pt-4 text-stone-900">Customize your url :</label>
           <input
             className={errors['alias'] ? "input-invalid" :"input"}
             value={data.alias}
@@ -75,8 +75,8 @@ function UrlForm(props) {
             {errors['alias']&& <p  className="error-label">{errors["alias"]}</p>}
           
           <div className="py-2 z-0 relative"> 
-            <label htmlFor="allowmod" className="pt-2 text-stone-900 hover:cursor-help peer ">Allow non-strict mode for custom-named urls </label>
-            <span className=" invisible peer-hover:visible opacity-0 peer-hover:opacity-100 duration-300   bg-stone-900 w-3/4  py-1 px-2 text-center rounded-2xl text-white text-sm  transition-all ease-in absolute">Add characters at the end of your url if your custom url has already been taken.</span>
+            <label htmlFor="allowmod" className="pt-2 text-stone-900 hover:cursor-help peer text-sm sm:text-base lg:text-lg ">Allow non-strict mode for custom-named urls </label>
+            <span className=" invisible peer-hover:visible opacity-0 peer-hover:opacity-100 duration-300   bg-stone-900 w-3/4 lg:w-1/2  py-1 px-2 text-center rounded-2xl text-white text-sm  transition-all ease-in absolute left-0 -top-full">Add characters at the end of your url if your custom url has already been taken.</span>
           <input
             className="accent-primary-green"
             type="checkbox"
@@ -87,7 +87,7 @@ function UrlForm(props) {
           </div>
          
 
-          <button className="btn-validation z-0 self-center"type="submit">Make it SMOL !</button>
+          <button className="btn-validation z-0 self-center lg:text-lg"type="submit">Make it SMOL !</button>
         </form>
       </section>
     
