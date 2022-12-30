@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 const Header = ({ToggleSidebar,sidebarVisible}) => {
   return (
-    <header className="bg-stone-800 h-24 2xl:h-32 px-6 py-2 flex items-center justify-around shadow-sm shadow-stone-800 z-20 ">
+    <header className="bg-stone-800 w-full h-24 2xl:h-28 px-6 lg:px-12 py-2 flex items-center justify-around shadow-sm shadow-stone-800 z-20 ">
       <div className="w-2/3">
         <h1 className="text-secondary-yellow font-bold text-4xl 2xl:text-6xl">SMOL</h1>
         <h2 className="text-secondary-yellow text-xl 2xltext-2xl" >Your urls, SMOLER</h2>
