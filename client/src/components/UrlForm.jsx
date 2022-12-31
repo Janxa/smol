@@ -37,7 +37,7 @@ function UrlForm(props) {
         },
         { abortEarly: false }
       );
-      const res = await axios.post("shortner/generate", data);
+      const res = await axios.post("/api/shortner/generate", data);
       props.add_url_to_list(res.data);
       lastUrl = res.data;
       props.setLastUrl(lastUrl );

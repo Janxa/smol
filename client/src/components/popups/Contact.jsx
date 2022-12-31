@@ -16,7 +16,7 @@ function Contact(props) {
     event.preventDefault();
     try {
     await schema.validateAsync({mail_sender:mail_sender,mail_content:mail_content},{abortEarly:false});
-    const res = await toast.promise( axios.post("contact/send", {mail_content,mail_sender}),
+    const res = await toast.promise( axios.post("/api/contact/send", {mail_content,mail_sender}),
     {
       pending: 'Loading',
       success: '📧 Your email has been sent !',

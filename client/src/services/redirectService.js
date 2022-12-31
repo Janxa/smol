@@ -11,7 +11,7 @@ async function redirect(){
 
     if (url != BASE_URL){
         try{
-        const res= await axios.get(API_URL+'/redirect/'+short_url);
+        const res= await axios.get(API_URL+'/api/redirect/'+short_url);
         window.location.replace(res.data)
         }catch (e) {
             window.location.replace(BASE_URL);
