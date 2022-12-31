@@ -5,7 +5,7 @@ from backend.extensions import url_collection
 
 
 
-shortner = Blueprint('shortner',__name__, url_prefix='/shortner')
+shortner = Blueprint('shortner',__name__, url_prefix='/api/shortner')
 @shortner.route('/generate',methods=['POST'])
 
 def generate():

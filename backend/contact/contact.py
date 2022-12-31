@@ -2,7 +2,7 @@ from flask import Blueprint,request
 from backend.services import send_contact_email
 
 
-contact = Blueprint('contact',__name__, url_prefix='/contact')
+contact = Blueprint('contact',__name__, url_prefix='/api/contact')
 @contact.route('/send',methods=['POST'])
 
 def sendmail():
