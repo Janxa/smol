@@ -1,9 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import UrlForm from "./UrlForm";
 import { useState } from "react";
-import UrlPairs from "./UrlPairs";
 import { withCookies } from "react-cookie";
-import axios from "axios";
 
 const Main = (props) => {
   const [lastUrl,setLastUrl] =useState(null)
