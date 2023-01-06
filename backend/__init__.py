@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, current_app
 from backend.contact.contact import contact
 from backend.shortner.shortner import shortner
 from backend.redirect.redirect import redirection
@@ -13,5 +13,7 @@ def create_app() :
     app.register_blueprint(contact)
     app.register_blueprint(shortner)
     app.register_blueprint(redirection)
+    @app.route('/')
+    def index():
+        return app.send_static_file('index.html')
     return app
-
