@@ -2,7 +2,7 @@ from flask import Blueprint, request,current_app
 from backend.services import generate_url ,delete_url
 from backend.extensions import url_collection
 
-
+from datetime import datetime
 
 
 shortner = Blueprint('shortner',__name__, url_prefix='/api/shortner')
@@ -10,8 +10,8 @@ shortner = Blueprint('shortner',__name__, url_prefix='/api/shortner')
 
 def generate():
     x = request.get_json()
-    long_url,alias,allowMod = x['url'],x['alias'],x['allowMod']
-    generated_url=generate_url(long_url,alias,allowMod)
+    long_url,alias,allowMod,time = x['url'],x['alias'],x['allowMod'],datetime.datetime.utcnow()
+    generated_url=generate_url(long_url,alias,allowMod,time)
     return generated_url, 200
 
 # @shortner.route('/retrieve',methods=['GET'])
