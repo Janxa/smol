@@ -7,10 +7,11 @@ from flask_mail import Mail
 
 
 def create_app() :
-    app = Flask(__name__)
+    app = Flask(__name__,static_folder="../client/build", static_url_path='/')
     app.config.from_object('backend.settings.app_config')
     mail.init_app(app)
     app.register_blueprint(contact)
     app.register_blueprint(shortner)
     app.register_blueprint(redirection)
     return app
+
