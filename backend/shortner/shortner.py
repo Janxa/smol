@@ -10,7 +10,7 @@ shortner = Blueprint('shortner',__name__, url_prefix='/api/shortner')
 
 def generate():
     x = request.get_json()
-    long_url,alias,allowMod,time = x['url'],x['alias'],x['allowMod'],datetime.datetime.utcnow()
+    long_url,alias,allowMod,time = x['url'],x['alias'],x['allowMod'],datetime.utcnow()
     generated_url=generate_url(long_url,alias,allowMod,time)
     return generated_url, 200
 
