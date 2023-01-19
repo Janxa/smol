@@ -14,7 +14,7 @@ def create_app() :
     app.register_blueprint(shortner)
     app.register_blueprint(redirection)
     @app.route('/')
-    def index(path):
+    def index():
         return app.send_static_file('index.html')
     @app.route('/<path>')
     def index(path):
