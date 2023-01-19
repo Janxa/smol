@@ -36,7 +36,7 @@ function Popup(props) {
 
   return( <><div ref={OpacityRef}className=''></div>
   <div ref={PopupRef} className= "scale-0 top-1/2 left-1/2 w-5/6 xl:w-4/6 2xl:w-7/12  z-50 absolute -translate-x-1/2 -translate-y-1/2  bg-stone-200 transition-transform ease-in duration-300">
-      <span onClick={animatedClosePopup}className="after:content-['\ud7'] after:cursor-pointer after:text-2xl after:text-primary-brown after:hover:text-black after:absolute after:hover:scale-105 after:top-0 after:right-3 md:after:top-2 md:after:right-5 md:after:scale-110 md:after:hover:scale-[1.3]"></span>
+      <span onClick={animatedClosePopup}className="after:content-['\00d7'] after:cursor-pointer after:text-2xl after:text-primary-brown after:hover:text-black after:absolute after:hover:scale-105 after:top-0 after:right-3 md:after:top-2 md:after:right-5 md:after:scale-110 md:after:hover:scale-[1.3]"></span>
       <div className="md:p-2 ">
 
       <Content />
