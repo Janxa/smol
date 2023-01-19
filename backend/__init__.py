@@ -17,6 +17,6 @@ def create_app() :
     def index():
         return app.send_static_file('index.html')
     @app.route('/<path>')
-    def index(path):
+    def renderindex(path):
         return app.send_static_file('index.html')
     return app
