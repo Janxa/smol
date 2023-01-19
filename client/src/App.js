@@ -24,7 +24,7 @@ function App() {
         path: "/",
       });
     }
-  },[url_list,setCookie]
+  },[url_list,setCookie,cookies]
     )
   function CreateCookie(url_list) {
     setCookie("url_list", url_list, {

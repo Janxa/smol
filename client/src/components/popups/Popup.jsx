@@ -16,7 +16,7 @@ function Popup(props) {
         console.log("unmounting")
         document.removeEventListener("click", handleClickOutside,{capture:true});
       };
-    }, [PopupRef,animatedClosePopup]);
+    }, [PopupRef]);
 
     useEffect(()=>{
     if (visible){
