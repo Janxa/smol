@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import {  toast } from 'react-toastify';
 import { useEffect,useState} from "react";
 import { contact_schema } from "../../joi_schemas/contact_schema"
 import axios from "axios";
 
 function Contact(props) {
-  const Joi = require("joi");
   const [mail_sender,setmail_sender]= useState("")
   const [mail_content,setmail_content]= useState("")
   const [errors,setErrors]=useState({})
@@ -38,9 +37,9 @@ function Contact(props) {
 
   // might implement real time error handling
    useEffect(()=>{
-    
+
       console.log("error", errors);
-     
+
    }
   )
   return (
@@ -59,14 +58,14 @@ function Contact(props) {
         rows="10"
         value={mail_content}
         onChange={(e) =>setmail_content(e.target.value)}
-        
+
       ></textarea>
       {errors["mail_content"] && <p className="error-label">{errors["mail_content"]}</p>}
 
       <input type="submit" value="Send Email !" className="btn-validation mt-2"/>
 
     </form>
-      
+
   );
 }
 

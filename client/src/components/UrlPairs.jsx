@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 function UrlPairs(props) {
   return (
     <div className="w-4/5 pt-2 flex flex-col">

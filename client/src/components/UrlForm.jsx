@@ -1,8 +1,6 @@
-import React, { Component, useState } from "react";
+import React, {  useState } from "react";
 import { url_schema } from "../joi_schemas/url_schema";
 import axios from "axios";
-import UrlPairs from "./UrlPairs";
-const Joi = require("joi");
 
 function UrlForm(props) {
   const [data,setData] = useState( { url: "", alias: "", allowMod: false });
@@ -50,10 +48,10 @@ function UrlForm(props) {
     }
     setErrors(errors )
   };
-  return ( 
-    
+  return (
+
     <section className=" bg-stone-200 w-10/12 p-4 m-4 rounded-md shadow-sm md:w-9/12 lg:w-2/3  ">
-   
+
         <form onSubmit={handleSubmit} className="flex flex-col">
           <label htmlFor="url" className="pt-2 text-lg lg:text-xl lg:pt-4 text-stone-900">Enter the url you want to shorten :</label>
           <input
@@ -73,8 +71,8 @@ function UrlForm(props) {
             type="text"
             />
             {errors['alias']&& <p  className="error-label">{errors["alias"]}</p>}
-          
-          <div className="py-2 z-0 relative"> 
+
+          <div className="py-2 z-0 relative">
             <label htmlFor="allowmod" className="pt-2 text-stone-900 hover:cursor-help peer text-sm sm:text-base lg:text-lg ">Allow non-strict mode for custom-named urls </label>
             <span className=" invisible peer-hover:visible opacity-0 peer-hover:opacity-100 duration-300   bg-stone-900 w-3/4 lg:w-1/2  py-1 px-2 text-center rounded-2xl text-white text-sm  transition-all ease-in absolute left-0 -top-full">Add characters at the end of your url if your custom url has already been taken.</span>
           <input
@@ -85,12 +83,12 @@ function UrlForm(props) {
             onChange={handleCheck}
           />
           </div>
-         
+
 
           <button className="btn-validation z-0 self-center lg:text-lg"type="submit">Make it SMOL !</button>
         </form>
       </section>
-    
+
   );
 }
 
