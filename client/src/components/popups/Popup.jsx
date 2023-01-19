@@ -16,13 +16,14 @@ function Popup(props) {
         console.log("unmounting")
         document.removeEventListener("click", handleClickOutside,{capture:true});
       };
-    }, [PopupRef]);
+    }, [PopupRef,animatedClosePopup]);
 
     useEffect(()=>{
     if (visible){
     setTimeout(()=>(
-      PopupRef.current.className="scale-100  rounded-lg p-4 top-1/2 left-1/2 w-5/6 xl:w-4/6 2xl:w-7/12 absolute z-50  -translate-x-1/2 -translate-y-1/2 absolute bg-stone-200 transition-transform ease-in duration-300",OpacityRef.current.className= "h-screen w-screen bg-gray-800/[0.3] absolute  z-10 transition-all ease-in duration-300"),10)
-    }},[visible,animatedClosePopup],
+      PopupRef.current.className="scale-100  rounded-lg p-4 top-1/2 left-1/2 w-5/6 xl:w-4/6 2xl:w-7/12 absolute z-50  -translate-x-1/2 -translate-y-1/2 absolute bg-stone-200 transition-transform ease-in duration-300"
+      ,OpacityRef.current.className= "h-screen w-screen bg-gray-800/[0.3] absolute  z-10 transition-all ease-in duration-300"),10)
+    }},[visible],
 
     )
 

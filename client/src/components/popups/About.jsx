@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 function About() {
   return (
     <div className="h-full w-full lg:p-4 ">
