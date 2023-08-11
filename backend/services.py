@@ -5,7 +5,7 @@ from flask import current_app, make_response
 from backend.extensions import url_collection,mail
 from backend.settings import app_config
 from flask_mail import Mail, Message
-def generate_url(long,alias,allowMod):
+def generate_url(long,alias,allowMod,time):
     domain_name=(current_app.config['DOMAIN_NAME'])
     
     if alias == '':
@@ -20,7 +20,7 @@ def generate_url(long,alias,allowMod):
                 short = domain_name +'/'+alias+"/" +secrets.token_urlsafe(7)
             else:
                 return 'error'
-    url_collection.insert_one({"short":short,"long":long})
+    url_collection.insert_one({"short":short,"long":long,"time":time})
     return {"short":short,"long":long}
         
 def get_long_url(short):

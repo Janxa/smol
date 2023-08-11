@@ -8,7 +8,7 @@ import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
 import Popup from "./components/popups/Popup";
 import CookiesBanner from "./components/Cookies";
-import { useCookies,Cookies } from "react-cookie";
+import { useCookies } from "react-cookie";
 function App() {
 
 
@@ -24,29 +24,29 @@ function App() {
         path: "/",
       });
     }
-  },[url_list]
+  },[url_list,setCookie,cookies]
     )
   function CreateCookie(url_list) {
     setCookie("url_list", url_list, {
       path: "/",
     });
-    
+
     setCookieVisible(false);
   }
   function RefuseCookie(){
     setCookieVisible(false);
   }
-  
+
   function OpenPopup(content) {
     // setPopup({content:content,visible:true})
-    if (popup.content==content){
+    if (popup.content===content){
       return
     }
      if (popup.visible){
        setTimeout(()=>setPopup({content:content,visible:true}),400);}
      else {setPopup({content:content,visible:true})};
   }
-   
+
   function ClosePopup(){
    setPopup({content:null,visible:false});
   }
@@ -70,22 +70,22 @@ function App() {
         cookieVisible={cookieVisible}
       />
 
-      <Main 
+      <Main
       url_list={url_list}
       setUrl_list={setUrl_list}
-    
+
       />
-      
+
       <Footer OpenPopup={OpenPopup} />
 
       {popup.visible &&
-      <Popup 
+      <Popup
       Content={popup.content}
       visible={popup.visible}
       ClosePopup={ClosePopup}
       />
 }
-      
+
       { cookieVisible && (
           <CookiesBanner
             RefuseCookie={RefuseCookie}

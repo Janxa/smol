@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Privacy from "./popups/Privacy";
 import Contact from "./popups/Contact";
 import About from "./popups/About";

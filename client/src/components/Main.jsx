@@ -5,14 +5,14 @@ import { withCookies } from "react-cookie";
 
 const Main = (props) => {
   const [lastUrl,setLastUrl] =useState(null)
-  const {url_list,setUrl_list,cookies} = props
+  const {url_list,setUrl_list} = props
   const add_url_to_list = (url) => {
     const new_url_list = [...url_list];
     new_url_list.push(url);
     setUrl_list(new_url_list)
   };
 
-  return ( 
+  return (
     <main className="flex flex-col-reverse items-center justify-between ">
       <UrlForm
         setLastUrl={setLastUrl}
@@ -33,5 +33,5 @@ const Main = (props) => {
         )}
     </main> );
 }
- 
+
 export default withCookies(Main);
