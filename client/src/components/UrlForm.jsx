@@ -66,7 +66,7 @@ function UrlForm({ setShortenedUrl, setShortenedUrlError }) {
 	};
 
 	return (
-		<section className=" bg-stone-200 w-10/12 p-4 m-4 rounded-md shadow-sm md:w-9/12 lg:w-2/3  ">
+		<section className=" bg-stone-200 w-10/12 p-4 m-4 rounded-md shadow-sm md:w-9/12 lg:w-3/5  ">
 			<form onSubmit={handleSubmit} className="flex flex-col">
 				<label
 					htmlFor="url"
