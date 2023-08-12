@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { url_schema } from "../joi_schemas/url_schema";
 import axios from "axios";
 
-function UrlForm(props) {
+function UrlForm({ setShortenedUrl, setShortenedUrlError }) {
 	const [data, setData] = useState({ url: "", alias: "", allowMod: false });
 	const [errors, setErrors] = useState({});
+
 	const schema = url_schema;
+
 	const handleChange = ({ currentTarget: input }) => {
 		if (errors[input.name]) {
 			setErrors((errors) => {
@@ -29,10 +31,13 @@ function UrlForm(props) {
 			};
 		});
 	};
+
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		let errors = {};
 		let lastUrl = {};
+		setShortenedUrlError(null);
+		setShortenedUrl(null);
 		const validationResult = schema.validate(
 			{
 				url: data["url"],
@@ -40,7 +45,6 @@ function UrlForm(props) {
 			},
 			{ abortEarly: false }
 		);
-
 		if (validationResult.error) {
 			console.log(validationResult.error);
 			validationResult.error.details.forEach(
@@ -52,16 +56,15 @@ function UrlForm(props) {
 
 		try {
 			const res = await axios.post("/api/shortner/generate", data);
-			console.log(res);
-			props.add_url_to_list(res.data.urls);
 			lastUrl = res.data.urls;
-			props.setLastUrl(lastUrl);
+			setShortenedUrl(lastUrl);
 			setData({ url: "", alias: "", allowMod: false });
 		} catch (error) {
-			console.log(error);
+			setShortenedUrlError(error.response.data.error);
 			return;
 		}
 	};
+
 	return (
 		<section className=" bg-stone-200 w-10/12 p-4 m-4 rounded-md shadow-sm md:w-9/12 lg:w-2/3  ">
 			<form onSubmit={handleSubmit} className="flex flex-col">
