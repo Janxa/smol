@@ -26,13 +26,13 @@ function Sidebar(props) {
 			<div
 				onClick={() => setVisible(!visible)}
 				className={
-					"hidden lg:block bg-stone-100 hover:bg-secondary-yellow w-24 h-32  z-0 cursor-pointer shadow-sm  relative top-1/2 left-0 -translate-x-1/2 rounded-full transition-colors duration-300 "
+					"hidden lg:block bg-stone-100 hover:bg-secondary-yellow w-24 h-28  z-0 cursor-pointer shadow-sm  relative top-1/2 left-0 -translate-x-1/2 rounded-full transition-colors duration-300 "
 				}
 			>
 				<span
 					className={
 						(!visible ? "-rotate-[135deg]" : "rotate-45 -translate-x-1/2") +
-						"  border-stone-800 p-3 absolute -translate-y-1/2 top-1/2 left-1/4 inline-block border-t-8 border-r-8 transition-all  duration-300"
+						"  border-stone-800 p-3 absolute -translate-y-1/2 top-1/2 left-1/4 inline-block border-t-[6px] border-r-[6px] transition-all  duration-300"
 					}
 				></span>
 			</div>
