@@ -36,8 +36,8 @@ function Sidebar(props) {
 					}
 				></span>
 			</div>
-			<div className="px-6 py-4 w-full h-full z-10 bg-stone-100 overflow-scroll">
-				<h3 className="text-2xl lg:text-4xl xl:text-5xl  font-medium text-stone-900">
+			<div className="px-6 py-4 w-full h-full z-10 relative top-24 lg:static bg-stone-100 overflow-scroll">
+				<h3 className="text-2xl lg:text-4xl 2xl:text-5xl  font-medium text-stone-900">
 					Your recent smol urls:
 				</h3>
 				<ul className="flex flex-col h-full">
@@ -45,7 +45,7 @@ function Sidebar(props) {
 						url_list.map((url_pair, id) => (
 							<li key={id} className=" py-2 border-b-2 border-primary-brown-2">
 								<UrlPairs data={url_pair} />
-								<div className="pb-2 pt-3 xl:pt-4 flex justify-around w-2/3 lg:w-full 2xl:w-2/3">
+								<div className="pb-2 pt-3 xl:pt-4 flex justify-around w-full sm:w-2/3 md:w-1/2 lg:w-full 2xl:w-2/3">
 									<Button
 										color="green"
 										onClick={null}
