@@ -3,8 +3,8 @@ import React, { Component } from "react";
 const LoadingWheel = () => {
 	return (
 		<div
-			className=" inline-block w-20 h-20 relative
-            top-10
+			className=" inline-block w-16 h-16 relative
+            top-8
         [&>div]:after:block
         [&>div]:after:absolute
         [&>div]:after:top-1
