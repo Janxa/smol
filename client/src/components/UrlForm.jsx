@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { url_schema } from "../joi_schemas/url_schema";
 import axios from "axios";
-
+import LoadingWheel from "./Common/LoadingWheel";
+import Button from "./Common/Button";
 function UrlForm({ setShortenedUrl, setShortenedUrlError }) {
 	const [data, setData] = useState({ url: "", alias: "", allowMod: false });
 	const [errors, setErrors] = useState({});
-
+	const [loading, setLoading] = useState(false);
 	const schema = url_schema;
 
 	const handleChange = ({ currentTarget: input }) => {
@@ -36,6 +37,7 @@ function UrlForm({ setShortenedUrl, setShortenedUrlError }) {
 		event.preventDefault();
 		let errors = {};
 		let lastUrl = {};
+		setLoading(true);
 		setShortenedUrlError(null);
 		setShortenedUrl(null);
 		const validationResult = schema.validate(
@@ -46,11 +48,11 @@ function UrlForm({ setShortenedUrl, setShortenedUrlError }) {
 			{ abortEarly: false }
 		);
 		if (validationResult.error) {
-			console.log(validationResult.error);
 			validationResult.error.details.forEach(
 				(error) => (errors[error.context.label] = error.message)
 			);
 			setErrors(errors);
+			setLoading(false);
 			return;
 		}
 
@@ -61,8 +63,11 @@ function UrlForm({ setShortenedUrl, setShortenedUrlError }) {
 			setData({ url: "", alias: "", allowMod: false });
 		} catch (error) {
 			setShortenedUrlError(error.response.data.error);
+			setLoading(false);
 			return;
 		}
+		setLoading(false);
+		return;
 	};
 
 	return (
@@ -96,7 +101,6 @@ function UrlForm({ setShortenedUrl, setShortenedUrlError }) {
 					type="text"
 				/>
 				{errors["alias"] && <p className="error-label">{errors["alias"]}</p>}
-
 				<div className="py-2 z-0 relative">
 					<label
 						htmlFor="allowmod"
@@ -116,13 +120,13 @@ function UrlForm({ setShortenedUrl, setShortenedUrlError }) {
 						onChange={handleCheck}
 					/>
 				</div>
-
-				<button
-					className="btn-validation z-0 self-center lg:text-lg"
-					type="submit"
-				>
-					Make it SMOL !
-				</button>
+				<div className="flex justify-center ">
+					{loading ? (
+						<LoadingWheel />
+					) : (
+						<Button text="Make it SMOL !" type="submit" color="green" />
+					)}
+				</div>
 			</form>
 		</section>
 	);
