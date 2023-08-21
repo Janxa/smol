@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-const Button = ({ color, onClick, text }) => {
+const Button = ({ color, onClick, text, type }) => {
 	const style =
 		color == "green"
 			? `text-md
@@ -27,7 +27,7 @@ const Button = ({ color, onClick, text }) => {
       transition-all ease-in-out duration-200
     `;
 	return (
-		<button onClick={onClick} className={style}>
+		<button onClick={onClick} type={type} className={style}>
 			{text}
 		</button>
 	);
