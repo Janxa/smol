@@ -44,7 +44,7 @@ const Main = ({ url_list, setUrl_list }) => {
 							></span>
 						</div>
 						<div className="bg-stone-200 rounded-b-md ">
-							<p className=" text-primary-brown px-2 pt-2 lg:text-md ">
+							<p className=" text-primary-green px-2 pt-2 lg:text-md underline font-medium">
 								{shortenedUrl.short}
 							</p>
 							<p className=" line-through py-2 pl-2 truncate text-sm text-stone-500 ">
