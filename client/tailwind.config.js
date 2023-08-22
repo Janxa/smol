@@ -27,8 +27,19 @@ module.exports = {
 					"0%": { opacity: 0 },
 					"100%": { opacity: 1 },
 				},
+				bounceLeft: {
+					"0%": { transform: "translate(-50%)" },
+					"25%": { transform: "translate(-75%)" },
+					"50%": { transform: "translate(-50%)" },
+					"75%": { transform: "translate(-75%)" },
+					"100%": { transform: "translate(-50%)" },
+				},
 			},
-			animation: { "spin-loader": "loader 1.2s linear infinite" },
+
+			animation: {
+				"spin-loader": "loader 1.2s linear infinite",
+				"bounce-arrow": "bounceLeft 0.635s ease-out ",
+			},
 		},
 	},
 	plugins: [
