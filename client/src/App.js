@@ -11,7 +11,7 @@ import CookiesBanner from "./components/Cookies";
 import { useCookies } from "react-cookie";
 
 function App() {
-	const [cookies, setCookie] = useCookies([]);
+	const [cookies, setCookie] = useCookies();
 	const [cookieTabVisible, setCookieTabVisible] = useState(
 		cookies.url_list ? false : true
 	);
@@ -25,12 +25,14 @@ function App() {
 				path: "/",
 			});
 		}
-	}, [url_list, setCookie, cookies]);
+	}, [url_list]);
 
 	function CreateCookie(url_list) {
+		console.log("creating cookie");
 		setCookie("url_list", url_list, {
 			path: "/",
 		});
+		console.log("cookie created");
 
 		setCookieTabVisible(false);
 	}
@@ -39,7 +41,6 @@ function App() {
 	}
 
 	function OpenPopup(content) {
-		// setPopup({content:content,visible:true})
 		if (popup.content === content) {
 			return;
 		}
