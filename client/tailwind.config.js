@@ -7,7 +7,7 @@ module.exports = {
 	theme: {
 		extend: {
 			fontFamily: {
-				sans: ["Roboto", ...defaultTheme.fontFamily.sans],
+				sans: ["Ubuntu", ...defaultTheme.fontFamily.sans],
 			},
 			colors: {
 				"primary-green": "#157F1F",
