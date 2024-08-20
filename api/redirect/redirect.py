@@ -1,5 +1,5 @@
 from flask import Blueprint,redirect,make_response
-from backend.services import get_long_url
+from api.services import get_long_url
 
 redirection = Blueprint('redirect',__name__, url_prefix='/api/redirect')
 @redirection.route('/<short>',methods=['GET'])

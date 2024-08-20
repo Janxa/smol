@@ -1,5 +1,5 @@
 from flask import Blueprint,request
-from backend.services import send_contact_email
+from api.services import send_contact_email
 
 
 contact = Blueprint('contact',__name__, url_prefix='/api/contact')

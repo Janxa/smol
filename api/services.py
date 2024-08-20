@@ -2,8 +2,8 @@
 import secrets
 
 from flask import current_app, make_response
-from backend.extensions import url_collection,mail
-from backend.settings import app_config
+from api.extensions import url_collection,mail
+from api.settings import app_config
 from flask_mail import Mail, Message
 def generate_url(long,alias,allowMod,time):
     domain_name=(current_app.config['DOMAIN_NAME'])

@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 from flask_mail import Mail
-from backend.settings import mongo_config
+from api.settings import mongo_config
 
 mail = Mail()
 

@@ -1,6 +1,6 @@
 from flask import Blueprint, request,make_response
-from backend.services import generate_url ,delete_url
-from backend.extensions import url_collection
+from api.services import generate_url ,delete_url
+from api.extensions import url_collection
 
 from datetime import datetime
 
