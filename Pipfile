@@ -4,13 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "==2.2.2"
-pymongo = "==4.3.3"
-python-dotenv = "==0.21.0"
-flask-mail = "==0.9.1"
+pymongo = "==4.8.0"
+python-dotenv = "==1.0.1"
+flask-mail = "==0.10.0"
 gunicorn = "*"
+flask = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.8"
+python_version = "3.12"
