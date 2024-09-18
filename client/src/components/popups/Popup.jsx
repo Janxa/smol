@@ -1,51 +1,47 @@
-import React, { useRef, useEffect } from "react";
-function Popup(props) {
-	const { ClosePopup, Content, visible } = props;
+import React, { useRef, useEffect, useCallback } from "react";
+export default function Popup({ ClosePopup, Content, visible }) {
 	const PopupRef = useRef(null);
 	const OpacityRef = useRef(null);
 
-	useEffect(() => {
-		function handleClickOutside(event) {
-			console.log(PopupRef);
-			if (PopupRef.current && !PopupRef.current.contains(event.target)) {
-				animatedClosePopup();
-			}
-		}
-		document.addEventListener("click", handleClickOutside, { capture: true });
-		return () => {
-			console.log("unmounting");
-			document.removeEventListener("click", handleClickOutside, {
-				capture: true,
-			});
-		};
-	}, [PopupRef]);
-
-	useEffect(() => {
-		if (visible) {
-			setTimeout(
-				() => (
-					(PopupRef.current.className =
-						"scale-100  rounded-lg p-4 top-1/2 left-1/2 w-5/6 xl:w-4/6 2xl:w-7/12 absolute z-50  -translate-x-1/2 -translate-y-1/2 absolute bg-stone-200 transition-transform ease-in duration-300"),
-					(OpacityRef.current.className =
-						"h-screen w-screen bg-gray-800/[0.3] absolute  z-10 transition-all ease-in duration-300")
-				),
-				10
-			);
-		}
-	}, [visible]);
-
-	const animatedClosePopup = () => {
+	const animatedClosePopup = useCallback(() => {
 		OpacityRef.current.className =
 			"h-screen w-screen bg-gray-800/[0.0] absolute  z-10 transition-all ease-in duration-300";
 		PopupRef.current.className =
 			"scale-0 top-1/2 left-1/2 w-5/6 xl:w-4/6 2xl:w-7/12 absolute z-50 -translate-x-1/2   -translate-y-1/2 bg-stone-200 transition-transform ease-in-out duration-300";
 		setTimeout(ClosePopup, 300);
-	};
-	console.log("ref", PopupRef);
+	}, [ClosePopup]);
+
+	useEffect(() => {
+		function handleClickOutside(event) {
+			if (!PopupRef.current.contains(event.target)) {
+				animatedClosePopup();
+			}
+		}
+		document.addEventListener("click", handleClickOutside, { capture: true });
+		return () => {
+			document.removeEventListener("click", handleClickOutside, {
+				capture: true,
+			});
+		};
+	}, [PopupRef, animatedClosePopup]);
+
+	useEffect(() => {
+		if (visible) {
+			setTimeout(
+				() =>
+					(PopupRef.current.className =
+						"scale-100 rounded-lg p-4 top-1/2 left-1/2 w-5/6 xl:w-4/6 2xl:w-7/12 absolute z-50 -translate-x-1/2 -translate-y-1/2 absolute bg-stone-200 transition-transform ease-in duration-300")(
+						(OpacityRef.current.className =
+							"h-screen w-screen bg-gray-800/[0.3] absolute z-10 transition-all ease-in duration-300")
+					),
+				10
+			);
+		}
+	}, [visible]);
 
 	return (
 		<>
-			<div ref={OpacityRef} className=""></div>
+			<div ref={OpacityRef}></div>
 			<div
 				ref={PopupRef}
 				className="scale-0 top-1/2 left-1/2 w-5/6 xl:w-4/6 2xl:w-7/12  z-50 absolute -translate-x-1/2 -translate-y-1/2  bg-stone-200 transition-transform ease-in duration-300"
@@ -61,5 +57,3 @@ function Popup(props) {
 		</>
 	);
 }
-
-export default Popup;
