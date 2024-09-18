@@ -24,6 +24,7 @@ function UrlForm({ setShortenedUrl, setShortenedUrlError }) {
 			};
 		});
 	};
+	
 	const handleCheck = ({ currentTarget: checkBox }) => {
 		setData((data) => {
 			return {
