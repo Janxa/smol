@@ -2,7 +2,7 @@
 import secrets
 
 from flask import current_app
-from api.db import find_short_url, insert_url
+from api.db import find_url, insert_url
 from api.errors import AliasAlreadyExistsError
 
 
@@ -30,7 +30,7 @@ def generate_alias(custom_alias: str, allow_modification: bool, domain_name: str
         else:
             short_alias = custom_alias
 
-        alias_exists = find_short_url(f"{domain_name}/{short_alias}")
+        alias_exists = find_url(f"{domain_name}/{short_alias}")
 
         if not alias_exists:
             return short_alias

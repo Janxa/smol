@@ -1,4 +1,4 @@
-from flask import Blueprint, request, make_response, current_app
+from flask import Blueprint, make_response, current_app
 
 from api.errors import AliasAlreadyExistsError
 from api.utils import validate_request_data
@@ -23,10 +23,10 @@ def generate_short_url():
         return make_response({"urls": generated_url}, 200)
 
     except KeyError as error:
-        return make_response({"error": f"Missing field: {error}"}, 400)
+        return make_response({"error": error}, 400)
 
-    except AliasAlreadyExistsError as e:
-        return make_response({"error": str(e)}, 409)
+    except AliasAlreadyExistsError as error:
+        return make_response({"error": error}, 409)
 
     except Exception as error:
         current_app.logger.exception('Exception when generating url', error)
@@ -42,7 +42,7 @@ def delete():
         return make_response({"success": "Url deleted successfully"}, 200)
 
     except KeyError as error:
-        return make_response({"error": f"Missing field: {error}"}, 400)
+        return make_response({"error": {error}}, 400)
 
     except Exception as e:
         current_app.logger.exception('Exception when deleting url', e)
