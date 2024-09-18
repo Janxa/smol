@@ -1,4 +1,4 @@
-from flask import Response, current_app, make_response
+from flask import current_app
 from flask_mail import Message
 from api.extensions import mail
 from api.settings import app_config
