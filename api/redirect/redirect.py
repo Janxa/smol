@@ -1,16 +1,21 @@
-from flask import Blueprint,redirect,make_response
-from api.services import get_long_url
+from flask import Blueprint, current_app, redirect, make_response
 
-redirection = Blueprint('redirect',__name__, url_prefix='/api/redirect')
-@redirection.route('/<short>',methods=['GET'])
+from api.db import find_url
 
-def redirection_url(short):
-    long = get_long_url(short)
-    print(long)
-    if long == "Url not found":
-        response = make_response(long,404)
-    else:
-        response = make_response(long)
-        response.headers.add("Access-Control-Allow-Origin", "*")
-    print(response)
-    return response
+redirection = Blueprint('redirect', __name__, url_prefix='/api/redirect')
+
+@redirection.route('/<short>', methods=['GET'])
+def redirection_url(short: str):
+    try:
+        domain_name=(current_app.config['DOMAIN_NAME'])
+        url_object = find_url(domain_name+'/'+short)
+        if url_object and url_object['long']:
+            response = redirect(url_object['long'])
+            response.headers.add("Access-Control-Allow-Origin", "*")
+            return response
+        else:
+            return make_response({"error": "URL not found"}, 404)
+
+    except Exception as error:
+        current_app.logger.exception('Exception when redirecting', error)
+        return make_response({"error": "Server error, try again later"}, 500)
