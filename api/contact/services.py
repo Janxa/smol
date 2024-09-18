@@ -24,5 +24,6 @@ def send_contact_email(content: str, sender: str) -> Response:
     except ValueError as error:
         return make_response(str(error), 413)
 
-    except Exception:
+    except Exception as error:
+        current_app.logger.exception(f'Error in send_contact_email: {error}')
         return make_response("Something went wrong", 500)
