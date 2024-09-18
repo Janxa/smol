@@ -13,27 +13,24 @@ import { useCookies } from "react-cookie";
 function App() {
 	const [cookies, setCookie] = useCookies();
 	const [cookieTabVisible, setCookieTabVisible] = useState(
-		cookies.url_list ? false : true
+		cookies.urlList ? false : true
 	);
-	const [sidebarVisible, setSidebarVisible] = useState(false);
+	const [isSidebarVisible, setIsSidebarVisible] = useState(false);
 	const [popup, setPopup] = useState({ content: null, visible: false });
-	const [url_list, setUrl_list] = useState(cookies.url_list || []);
+	const [urlList, setUrlList] = useState(cookies.urlList || []);
 
 	useEffect(() => {
 		if (Object.keys(cookies).length > 0) {
-			setCookie("url_list", url_list, {
+			setCookie("urlList", urlList, {
 				path: "/",
 			});
 		}
-	}, [url_list]);
+	}, [urlList]);
 
-	function CreateCookie(url_list) {
-		console.log("creating cookie");
-		setCookie("url_list", url_list, {
+	function CreateCookie(urlList) {
+		setCookie("urlList", urlList, {
 			path: "/",
 		});
-		console.log("cookie created");
-
 		setCookieTabVisible(false);
 	}
 	function RefuseCookie() {
@@ -55,26 +52,29 @@ function App() {
 		setPopup({ content: null, visible: false });
 	}
 	function ToggleSidebar() {
-		if (sidebarVisible) {
-			setSidebarVisible(false);
+		if (isSidebarVisible) {
+			setIsSidebarVisible(false);
 		} else {
-			setSidebarVisible(true);
+			setIsSidebarVisible(true);
 		}
 	}
 	return (
 		<div className="flex flex-col h-screen bg-stone-600 ">
 			<ToastContainer />
-			<Header ToggleSidebar={ToggleSidebar} sidebarVisible={sidebarVisible} />
+			<Header
+				ToggleSidebar={ToggleSidebar}
+				isSidebarVisible={isSidebarVisible}
+			/>
 
 			<Sidebar
-				url_list={url_list}
-				setUrl_list={setUrl_list}
-				visible={sidebarVisible}
-				setVisible={setSidebarVisible}
+				urlList={urlList}
+				setUrlList={setUrlList}
+				isVisible={isSidebarVisible}
+				setIsVisible={setIsSidebarVisible}
 				CreateCookie={CreateCookie}
 			/>
 
-			<Main url_list={url_list} setUrl_list={setUrl_list} />
+			<Main urlList={urlList} setUrlList={setUrlList} />
 
 			<Footer OpenPopup={OpenPopup} />
 
@@ -90,7 +90,7 @@ function App() {
 				<CookiesBanner
 					RefuseCookie={RefuseCookie}
 					CreateCookie={CreateCookie}
-					url_list={url_list}
+					urlList={urlList}
 				/>
 			)}
 		</div>

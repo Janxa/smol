@@ -1,5 +1,5 @@
 import React from "react";
-const Header = ({ ToggleSidebar, sidebarVisible }) => {
+const Header = ({ ToggleSidebar, isSidebarVisible }) => {
 	return (
 		<header
 			className="bg-stone-800 w-full h-24 2xl:h-28 sm:px-6 lg:px-12 py-2
@@ -16,7 +16,7 @@ const Header = ({ ToggleSidebar, sidebarVisible }) => {
 				<button
 					onClick={ToggleSidebar}
 					className={`lg:hidden ${
-						sidebarVisible
+						isSidebarVisible
 							? `w-full h-[65%] rounded-md px-2 flex flex-col justify-around items-center
 											[&>:first-child]: [&>:first-child]:translate-y-[345%] [&>:first-child]:rotate-45
 											[&>*]:hover:bg-primary-white [&>*]:bg-secondary-yellow [&>*]:transition-all

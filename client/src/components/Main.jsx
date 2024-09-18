@@ -3,13 +3,13 @@ import UrlForm from "./UrlForm";
 import { useState, useEffect } from "react";
 import { withCookies } from "react-cookie";
 
-const Main = ({ url_list, setUrl_list }) => {
+const Main = ({ setUrlList }) => {
 	const [shortenedUrl, setShortenedUrl] = useState(null);
 	const [shortenedUrlError, setShortenedUrlError] = useState(null);
 
 	useEffect(() => {
 		if (shortenedUrl) {
-			setUrl_list((prevList) => [...prevList, shortenedUrl]);
+			setUrlList((prevList) => [...prevList, shortenedUrl]);
 		}
 	}, [shortenedUrl]);
 
