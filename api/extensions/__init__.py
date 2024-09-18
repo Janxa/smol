@@ -1,4 +1,4 @@
-from .db import db
+from .db import database
 from .mail import mail
 
-__all__ = ['db', 'mail']
+__all__ = ['database', 'mail']
