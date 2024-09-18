@@ -1,40 +1,24 @@
 
-import secrets
 
 from flask import current_app, make_response
-from api.extensions import url_collection,mail
+from api.extensions import db, mail
 from api.settings import app_config
-from flask_mail import Mail, Message
-def generate_url(long,alias,allowMod,time):
-    domain_name=(current_app.config['DOMAIN_NAME'])
-
-    if alias == '':
-        short = domain_name +'/'+ secrets.token_urlsafe(7)
-        #Create a new short url if the generated one already exist
-        while url_collection.find_one({"short":short}) != None:
-            short = domain_name  +'/'+ secrets.token_urlsafe(7)
-    else:
-        short= domain_name+'/'+alias
-        if url_collection.find_one({"short":short}) != None:
-            if allowMod==True:
-                short = domain_name +'/'+alias+"/" +secrets.token_urlsafe(7)
-            else:
-                raise NameError()
-    url_collection.insert_one({"short":short,"long":long,"time":time})
-    return {"short":short,"long":long}
+from flask_mail import  Message
 
 def get_long_url(short):
     domain_name=(current_app.config['DOMAIN_NAME'])
+    url_collection = db['shortner']
     url_object = url_collection.find_one({"short":domain_name+'/'+short})
-    if url_object != None:
+    if url_object is not None:
         return url_object['long']
     else:
         return "Url not found"
 def delete_url(short):
+    url_collection = db['shortner']
     try :
         res = url_collection.find_one_and_delete({"short":short})
         print(res)
-        if res !=  None :
+        if res is not None :
             return make_response("Success",200)
         else :
             return make_response("Url already deleted or does not exist",200)
