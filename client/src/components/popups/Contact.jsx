@@ -1,10 +1,10 @@
 import React from "react";
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { contact_schema } from "../../joi_schemas/contact_schema";
 import axios from "axios";
 import Button from "../Common/Button";
-function Contact(props) {
+function Contact({ ClosePopup }) {
 	const [mail_sender, setmail_sender] = useState("");
 	const [mail_content, setmail_content] = useState("");
 	const [errors, setErrors] = useState({});
@@ -18,7 +18,7 @@ function Contact(props) {
 				{ mail_sender: mail_sender, mail_content: mail_content },
 				{ abortEarly: false }
 			);
-			const res = await toast.promise(
+			await toast.promise(
 				axios.post("/api/contact/send", { mail_content, mail_sender }),
 				{
 					pending: "Loading",
@@ -28,7 +28,7 @@ function Contact(props) {
 			);
 			setmail_sender("");
 			setmail_content("");
-			props.ClosePopup();
+			ClosePopup();
 		} catch (err) {
 			err.details.forEach(
 				(error) => (new_errors[error.context.label] = error.message)
@@ -47,7 +47,7 @@ function Contact(props) {
 				Any question ? Send me an e-mail through this form and i'll answer you
 				asap !
 			</p>
-			<label for="mail_sender" title="So I can answer your mail !">
+			<label htmlFor="mail_sender" title="So I can answer your mail !">
 				Your email adress :
 			</label>
 			<input
@@ -62,7 +62,7 @@ function Contact(props) {
 				<p className="error-label">{errors["mail_sender"]}</p>
 			)}
 
-			<label for="contact_message" title="Cant exceed 10 000 characters">
+			<label htmlFor="contact_message" title="Cant exceed 10 000 characters">
 				Your Message :
 			</label>
 			<textarea
