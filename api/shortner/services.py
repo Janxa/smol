@@ -1,20 +1,17 @@
 
-from datetime import UTC, datetime
 import secrets
 
 from flask import current_app
-from api.errors import DBError
-from api.extensions import db
+from api.db import find_short_url, insert_url
+from api.errors import AliasAlreadyExistsError
 
 
-
-def generate_alias(custom_alias: str, collection, allow_modification: bool, domain_name: str) -> str:
+def generate_alias(custom_alias: str, allow_modification: bool, domain_name: str) -> str:
     """
     Generates a short alias for a custom alias.
 
     Args:
         custom_alias (str): Custom alias given by the user.
-        collection (pymongo.collection.Collection): Collection to check for duplicate aliases.
         allow_modification (bool): Whether to modify the alias to make it unique.
         domain_name (str): Domain name to prepend to the short alias.
 
@@ -23,8 +20,7 @@ def generate_alias(custom_alias: str, collection, allow_modification: bool, doma
 
     Raises:
         RuntimeError: If a unique alias cannot be generated after 10 attempts.
-        DBError: If there is an error while accessing the database.
-        NameError: If the custom alias is already in use and modification is not allowed.
+        AliasAlreadyExistsError: If the custom alias is already in use and modification is not allowed.
     """
     for _ in range(10):
         if not custom_alias:
@@ -34,59 +30,30 @@ def generate_alias(custom_alias: str, collection, allow_modification: bool, doma
         else:
             short_alias = custom_alias
 
-        try:
-            alias_exists = collection.find_one({"short": f"{domain_name}/{short_alias}"})
-        except Exception as e:
-            raise DBError(f"Error while trying to access the database: {e}")
+        alias_exists = find_short_url(f"{domain_name}/{short_alias}")
 
-        if alias_exists is None:
+        if not alias_exists:
             return short_alias
-        elif custom_alias and  not allow_modification:
-            raise NameError(f"Alias '{short_alias}' is already taken.")
+        elif custom_alias and not allow_modification:
+            raise AliasAlreadyExistsError(f"Alias '{short_alias}' is already taken.")
 
     raise RuntimeError("Unable to generate a unique alias after multiple attempts.")
 
 
 def generate_url(long_url: str, custom_alias: str, allow_modification: bool) -> dict:
     """
-    Generate a short URL for a long URL. If the custom alias is empty,
-    generate a random one. If the custom alias is not empty, use it.
-    If the custom alias is already in use and modification is not allowed,
-    raise a NameError.
-
+    Generates a shortened URL from a given long URL and custom alias.
     Args:
-        long_url (str): Long URL to be shortened.
-        custom_alias (str): Custom alias given by the user.
-        allow_modification (bool): Whether to modify the alias to make it unique.
-        timestamp (int): Timestamp of the creation of the URL.
-
+        long_url (str): The original long URL to be shortened.
+        custom_alias (str): A custom alias for the shortened URL.
+        allow_modification (bool): Whether to allow modification of the custom alias.
     Returns:
-        dict: Dictionary containing the short and long URLs.
-
-    Raises:
-        DBError: If there is an error while accessing the database.
+        dict: A dictionary containing the shortened URL and the original long URL.
     """
-    collection = db["shortner"]
     domain_name = current_app.config["DOMAIN_NAME"]
-
-    short_alias = generate_alias(custom_alias, collection, allow_modification, domain_name)
-
-    short_url = f"{current_app.config['DOMAIN_NAME']}/{short_alias}"
-
-    try:
-        collection.insert_one({"short": short_url, "long": long_url, "time": datetime.now(UTC)})
-    except Exception as e:
-        raise DBError(f"Error while trying to access the database: {e}")
+    short_alias = generate_alias(custom_alias, allow_modification, domain_name)
+    short_url = f"{domain_name}/{short_alias}"
+    insert_url(short = short_url, long = long_url)
 
     return {"short": short_url, "long": long_url}
-
-
-
-def delete_url(short):
-    url_collection = db['shortner']
-    try:
-        url = url_collection.find_one_and_delete({"short": short})
-        return url is not None
-    except Exception as error:
-        raise DBError(f"Error while trying to access the database: {error}") from error
 

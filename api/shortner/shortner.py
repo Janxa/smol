@@ -1,38 +1,48 @@
 from flask import Blueprint, request, make_response, current_app
 
-from .services import delete_url, generate_url
+from api.errors import AliasAlreadyExistsError
+from api.utils import validate_request_data
+
+from .services import  generate_url
+from api.db import delete_url
 
 shortner = Blueprint('shortner',__name__, url_prefix='/api/shortner')
 
 @shortner.route('/generate', methods=['POST'])
-def generate():
+def generate_short_url():
+    """Generate a short URL from a long URL."""
     try:
-        data = request.get_json()
-        long_url = data['url']
-        alias = data['alias']
-        allow_mod = data['allowMod']
-        generated_url = generate_url(long_url, alias, allow_mod)
+        request_data = validate_request_data(["url"])
 
-        return make_response({'urls': generated_url}, 200)
+        long_url = request_data["url"]
+        custom_alias = request_data.get("alias", "")
+        allow_modification = request_data.get("allowMod", False)
 
-    except KeyError as e:
-        current_app.logger.exception(f'Exception when extracting data from request: {request} \n missing field: {e}')
-        return make_response({"error": f"Missing field: {e}"}, 400)
+        generated_url = generate_url(long_url, custom_alias, allow_modification)
 
-    except NameError:
-        return make_response({"error": "Alias already taken"}, 409)
+        return make_response({"urls": generated_url}, 200)
 
-    except Exception as e:
-        current_app.logger.exception('Exception when generating url', e)
+    except KeyError as error:
+        return make_response({"error": f"Missing field: {error}"}, 400)
+
+    except AliasAlreadyExistsError as e:
+        return make_response({"error": str(e)}, 409)
+
+    except Exception as error:
+        current_app.logger.exception('Exception when generating url', error)
         return make_response({"error": "Server error, try again later"}, 500)
 
 
 @shortner.route('/delete',methods=['DELETE'])
 def delete():
-    data = request.get_json()
+    """Deletes a URL by its short form."""
     try:
-        delete_url(data["short"])
+        request_data = validate_request_data(["short"])
+        delete_url(request_data["short"])
         return make_response({"success": "Url deleted successfully"}, 200)
+
+    except KeyError as error:
+        return make_response({"error": f"Missing field: {error}"}, 400)
 
     except Exception as e:
         current_app.logger.exception('Exception when deleting url', e)
